@@ -5,13 +5,13 @@ author        = "naitsa"
 description   = "Naitsas backend-app for Naitsasite"
 license       = "Limfjordsporter"
 srcDir        = "src"
-bin           = @["naitsabackendapp"]
+bin           = @["naitsabackend"]
 
 
 # Dependencies
 
 requires "nim >= 2.2.2"
-requires "jester >= 0.6.0"
+requires "prologue >= 0.6.6"
 
 
 # Configuration
