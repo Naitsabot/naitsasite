@@ -31,3 +31,20 @@ build/
 *.exe
 *.log
 *.lg
+
+
+.env
+.env.local
+!.env.production
+.env.development
+logs/
+*.db
+
+# Database files
+src/database/*.db
+src/database/*.db-journal
+src/database/*.db-wal
+src/database/*.db-shm
+
+# But keep the directory
+!src/database/.gitkeep

@@ -7,7 +7,7 @@ proc getHealthCheck*(ctx: Context) {.async.} =
     let healthData = %*{
         "status": "ok",
         "timestamp": $now(),
-        "version": "0.1.0",
+        "version": "1.0.0",
         "uptime": "TODO: calculate uptime",
         #"database": "connected"  # TODO: check DB connection here
     }
@@ -20,7 +20,7 @@ proc getDetailedHealth*(ctx: Context) {.async.} =
     let detailedData = %*{
         "status": "ok",
         "timestamp": $now(),
-        "version": "0.1.0",
+        "version": "1.0.0",
         #[ "services": {
             "database": "connected",
             "cache": "connected",

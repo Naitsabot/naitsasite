@@ -1,30 +1,37 @@
+import std/[logging]
 import prologue
-from ./routes/urls import applyAllRoutes
+
+import config/[config, database, logging]
+import routes/[urls]
 
 proc main() = 
-    # Load configuration
-    #loadConfig
-
-
+    # Load configuration first
+    let config = loadConfig()
+    echo "Configuration loaded for environment: " & $config.environment
+    
+    # Setup logging
+    setupLogging(config)
+    info("Starting " & config.appName)
+    
+    # Initialize database connection
+    discard initDatabase(config)
+    info("Database initialized")
+    
     # Create Prologue app
-    let
-        env = loadPrologueEnv(".env")
-        settings = newSettings(
-            appName = env.getOrDefault("appName", "Prologue"), # TODO: use ocnfigs instead?
-            debug = env.getOrDefault("debug", true), # TODO: use ocnfigs instead?
-            port = Port(env.getOrDefault("port", 8080)), # TODO: use ocnfigs instead?
-            #secretKey = env.getOrDefault("secretKey", "") # TODO: use ocnfigs instead?
-        )
+    let settings = newSettings(
+        appName = config.appName,
+        debug = config.server.debug,
+        port = Port(config.server.port),
+        address = config.server.host
+    )
 
     # Create Prologue app
     var app: Prologue = newApp(settings = settings)
-
 
     # Add middleware (order matters!)
     #app.use(loggingMiddleware())
     #app.use(corsMiddleware())
     #app.use(authMiddleware())  # Apply to routes that need auth
-
 
     # Register routes (Basically middleware)
     # Be careful with the routes.
