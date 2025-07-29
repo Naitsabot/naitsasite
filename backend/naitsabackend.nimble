@@ -11,7 +11,8 @@ bin           = @["naitsabackend"]
 # Dependencies
 
 requires "nim >= 2.2.2"
-requires "prologue >= 0.6.6"
+requires "prologue >= 0.6.6" # https://github.com/planety/Prologue
+requires "uuid4 >= 0.9.3" # https://github.com/vtbassmatt/nim-uuid4
 
 
 # Configuration
