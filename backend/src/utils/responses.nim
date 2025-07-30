@@ -1,4 +1,4 @@
-import std/[json, times, mimetypes, xmltree]
+import std/[mimetypes, xmltree]
 import prologue
 
 func xmlResponse*(text: XmlNode, code = Http200, headers = initResponseHeaders(),

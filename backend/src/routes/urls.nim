@@ -1,10 +1,9 @@
 import prologue
-import ./health, ./ping
+import ./misc
 
 proc applyAllRoutes*(app: var Prologue) =
     # Basic routes (no /api prefix)
-    app.applyHealthRoutes()
-    app.applyPingRoutes()
+    app.applyMiscRoutes()
     
     # API v1 routes using group routing
     var apiV1 = newGroup(app, "/api/v1", @[])

@@ -90,10 +90,6 @@ proc loadEnvFromFile() =
 proc loadConfig*(): AppConfig =
     ## Load configuration from environment variables
     
-    echo "Current working directory: " & getCurrentDir()
-    echo "Looking for .env at: " & getCurrentDir() / ".env"
-    echo ".env exists: " & $fileExists(".env")
-    
     # Load .env file if it exists
     if fileExists(".env"):
         load(getCurrentDir(), ".env")

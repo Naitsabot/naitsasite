@@ -1,5 +1,6 @@
 import std/[logging]
 import prologue
+#import prologue/middlewares/staticfile
 
 import config/[config, database, logging]
 import routes/[urls]
@@ -29,6 +30,7 @@ proc main() =
     var app: Prologue = newApp(settings = settings)
 
     # Add middleware (order matters!)
+    #app.use(staticFileMiddleware("public"))
     #app.use(loggingMiddleware())
     #app.use(corsMiddleware())
     #app.use(authMiddleware())  # Apply to routes that need auth
