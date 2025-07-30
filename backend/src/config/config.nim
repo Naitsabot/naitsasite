@@ -1,6 +1,7 @@
 import std/[os, strutils, logging]
 import dotenv 
 
+
 type 
     Environment* = enum
         Development = "development"

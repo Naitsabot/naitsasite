@@ -5,6 +5,7 @@ import prologue
 import config/[config, database, logging]
 import routes/[urls]
 
+
 proc main() = 
     # Load configuration first
     let config = loadConfig()
