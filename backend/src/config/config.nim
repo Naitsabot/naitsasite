@@ -38,12 +38,6 @@ type
 var appConfig*: AppConfig
 
 
-# Brugbare funktioner
-proc isDevelopment*(): bool = appConfig.environment == Development
-proc isProduction*(): bool = appConfig.environment == Production
-proc isTesting*(): bool = appConfig.environment == Testing
-
-
 proc getEnv*(key: string, default: string = ""): string =
     ## Get environment variable with optional default
     result = os.getEnv(key, default)
@@ -89,23 +83,27 @@ proc parseEnvironment*(env: string): Environment =
     else: Development
 
 
+proc loadEnvFromFile() = 
+    discard
+
+
 proc loadConfig*(): AppConfig =
     ## Load configuration from environment variables
     
+    echo "Current working directory: " & getCurrentDir()
+    echo "Looking for .env at: " & getCurrentDir() / ".env"
+    echo ".env exists: " & $fileExists(".env")
+    
     # Load .env file if it exists
-    if fileExists("/.env"):
-        load("/.env")
+    if fileExists(".env"):
+        load(getCurrentDir(), ".env")
         echo "Loaded /.env file"
-    else:
-        echo "Could not load .env from " & $getCurrentDir()
     
     # Load environment-specific .env file
-    let envFile = "/.env." & getEnv("ENVIRONMENT", "development")
+    let envFile = ".env." & getEnv("ENVIRONMENT", "development")
     if fileExists(envFile):
-        overload(envFile)
+        overload(getCurrentDir(), envFile)
         echo "Loaded " & envFile
-    else:
-        echo "Could not load " & envFile & " from " & $getCurrentDir()
     
     result = AppConfig(
         appName: getEnv("APP_NAME", "naitsabackendAPIdefaultname"),
@@ -118,7 +116,7 @@ proc loadConfig*(): AppConfig =
         ),
         
         database: DatabaseConfig(
-            url: getEnv("DATABASE_URL", "sqlite:///src/database/dev.db"),
+            url: getEnv("DATABASE_URL", "sqlite:///src/database/example.db"),
             maxConnections: getEnvInt("DB_MAX_CONNECTIONS", 10),
             timeout: getEnvInt("DB_TIMEOUT", 30)
         ),
@@ -130,18 +128,26 @@ proc loadConfig*(): AppConfig =
         
         logging: LoggingConfig(
             level: parseLogLevel(getEnv("LOG_LEVEL", "info")),
-            file: getEnv("LOG_FILE", "logs/app.log"),
+            file: getEnv("LOG_FILE", "src/logs/example.log"),
             console: getEnvBool("LOG_CONSOLE", true)
         )
     )
     
-    # Validate required configuration
+    # Valider nogle nødvendige konfigurationer, efter enviroment level
     if result.security.jwtSecret == "change-this-secret" and result.environment == Production:
         raise newException(ValueError, "JWT_SECRET must be set in production")
     
-    # Store globally for easy access
+    # Gem app cfg globalt i config.nim script globalt, for nemmere adgang
     appConfig = result
+
 
 
 proc getConfig*(): AppConfig =
     return appConfig
+
+
+# Brugbare funktioner når man leger med controllers 
+# eller andre server opearationer (logging, db, valudation, main, what have you)
+proc isDevelopment*(): bool = appConfig.environment == Development
+proc isProduction*(): bool = appConfig.environment == Production
+proc isTesting*(): bool = appConfig.environment == Testing

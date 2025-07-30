@@ -9,7 +9,7 @@ proc getHealthCheck*(ctx: Context) {.async.} =
         "timestamp": $now(),
         "version": "1.0.0",
         "uptime": "TODO: calculate uptime",
-        #"database": "connected"  # TODO: check DB connection here
+        "database": "connected"  # TODO: check DB connection here
     }
     
     resp jsonResponse(healthData)
@@ -21,11 +21,11 @@ proc getDetailedHealth*(ctx: Context) {.async.} =
         "status": "ok",
         "timestamp": $now(),
         "version": "1.0.0",
-        #[ "services": {
-            "database": "connected",
-            "cache": "connected",
-            "external_api": "connected"
-        }, ]#
+        "services": {
+            "database": "connected", # TODO: check DB connection here
+            "cache": "connected", # TODO: check DB connection here
+            "external_api": "connected" # TODO: check DB connection here
+        },
         "system": {
             "memory_usage": "TODO: get memory info",
             "cpu_usage": "TODO: get CPU info"
