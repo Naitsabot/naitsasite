@@ -40,3 +40,5 @@ src/database/*.db-shm
 nimble.develop
 nimble.paths
 nimbledeps
+
+app
