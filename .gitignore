@@ -1,11 +1,4 @@
-node_modules
-
 # Output
-.output
-.vercel
-.netlify
-.wrangler
-/.svelte-kit
 /build
 
 # OS
@@ -18,10 +11,6 @@ Thumbs.db
 !.env.example
 !.env.test
 
-# Vite
-vite.config.js.timestamp-*
-vite.config.ts.timestamp-*
-
 # Nimcache
 nimcache/
 cache/
@@ -32,7 +21,7 @@ build/
 *.log
 *.lg
 
-
+# Env
 .env
 .env.local
 !.env.production
