@@ -37,3 +37,6 @@ src/database/*.db-shm
 
 # But keep the directory
 !src/database/.gitkeep
+nimble.develop
+nimble.paths
+nimbledeps

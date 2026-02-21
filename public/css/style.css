@@ -1,0 +1,5 @@
+/* Intentionally minimal placeholder styling */
+body { font-family: system-ui, sans-serif; margin: 2rem; line-height: 1.5; }
+header { margin-bottom: 2rem; }
+main { max-width: 70ch; }
+code { background: #f3f3f3; padding: 0.1rem 0.25rem; }
