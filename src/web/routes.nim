@@ -9,17 +9,24 @@ import ./templates
 from ../utils/seqs import head
 
 proc home(ctx: Context, store: ContentStore, cfg: SiteConfig) {.async.} =
-  let latest = listCollection(store, "blog").head(5)
+  let latest_blogs = listCollection(store, "blog").head(5)
+  let latest_projects = listCollection(store, "projects").head(5)
 
   var body = "<h1>" & escape(cfg.siteTitle) & "</h1>" &
-              "<p>This is the homepage skeleton. Edit <code>src/web/templates.nim</code> later.</p>" &
-              "<h2>Latest posts</h2><ul>"
+              "<p>This is the homepage skeleton. Edit <code>src/web/templates.nim</code> later.</p>"
 
-  for d in latest:
+  body.add "<h2>Latest posts</h2><ul>"
+  for d in latest_blogs:
     body.add docListItem("/blog", d)
   body.add "</ul>"
 
+  body.add "<h2>Latest projects</h2><ul>"
+  for d in latest_projects:
+    body.add docListItem("/projects", d)
+  body.add "</ul>"
+
   resp htmlLayout(cfg.siteTitle, body)
+
 
 proc blog(ctx: Context, store: ContentStore, cfg: SiteConfig) {.async.} =
   let posts = listCollection(store, "blog")
@@ -28,6 +35,7 @@ proc blog(ctx: Context, store: ContentStore, cfg: SiteConfig) {.async.} =
     body.add docListItem("/blog", d)
   body.add "</ul>"
   resp htmlLayout("Blog - " & cfg.siteTitle, body)
+
 
 proc blog_slug(ctx: Context, store: ContentStore, cfg: SiteConfig) {.async.} =
   let slug = ctx.getPathParams("slug")
@@ -38,6 +46,7 @@ proc blog_slug(ctx: Context, store: ContentStore, cfg: SiteConfig) {.async.} =
   else:
     ctx.response.code = Http404
     resp htmlLayout("Not found", "<h1>404</h1><p>Post not found.</p>")
+
 
 proc projects(ctx: Context, store: ContentStore, cfg: SiteConfig) {.async.} =
   let docs = listCollection(store, "projects")
@@ -61,6 +70,7 @@ proc projects_slug(ctx: Context, store: ContentStore, cfg: SiteConfig) {.async.}
   else:
     ctx.response.code = Http404
     resp htmlLayout("Not found", "<h1>404</h1><p>Project doc not found.</p>")
+
 
 proc setupRoutes*(app: var Prologue, store: ContentStore, cfg: SiteConfig = defaultSiteConfig) =
   # Serve static files (css, images, etc.)
