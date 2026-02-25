@@ -68,6 +68,7 @@ proc parseMeta(yamlText, fallbackSlug: string, fallbackTitle: string): DocumentM
   result.summary = getStr(root, "summary", "")
   result.draft = getBool(root, "draft", false)
   result.tags = getTags(root, "tags")
+  result.gitlinks = getTags(root, "gitlinks")
 
 proc loadDocument*(collection: string, filePath: string): types.Document =
   let raw = readFile(filePath)

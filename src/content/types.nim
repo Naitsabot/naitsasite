@@ -9,6 +9,7 @@ type
         tags*: seq[string]
         draft*: bool
         summary*: string
+        gitlinks*: seq[string]
 
     Document* = object
         meta*: DocumentMeta

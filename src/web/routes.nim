@@ -13,7 +13,9 @@ proc home(ctx: Context, store: ContentStore, cfg: SiteConfig) {.async.} =
   let latest_projects = listCollection(store, "projects").head(5)
 
   var body = "<h1>" & escape(cfg.siteTitle) & "</h1>" &
-              "<p>This is the homepage skeleton. Edit <code>src/web/templates.nim</code> later.</p>"
+              "<p>Hello there! Welcome to my website.</p>"
+    
+  body.add renderHTMLTemplate("src/web/templates/components/profile_pic.html")
 
   body.add "<h2>Latest posts</h2><ul>"
   for d in latest_blogs:
@@ -74,7 +76,7 @@ proc projects_slug(ctx: Context, store: ContentStore, cfg: SiteConfig) {.async.}
 
 proc setupRoutes*(app: var Prologue, store: ContentStore, cfg: SiteConfig = defaultSiteConfig) =
   # Serve static files (css, images, etc.)
-  app.use(staticFileMiddleware("public", "/public"))
+  app.use(staticFileMiddleware(@["public"]))
 
   app.get("/", proc(ctx: Context) {.async.} = await home(ctx, store, cfg))
 
