@@ -13,7 +13,7 @@ type
 
 
 const defaultSiteConfig* = SiteConfig(
-    siteTitle: "NaitsaSite - Sebastian H. Lorenzen",
+    siteTitle: "NaitsaSite",
     baseUrl: "",
     collections: @[
         CollectionConfig(name: "blog", dir: "content/blog", routePrefix: "/blog", sortByDateDesc: true),

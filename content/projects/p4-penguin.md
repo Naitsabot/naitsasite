@@ -5,7 +5,7 @@ slug: p4-penguin
 tags: [university, pyhton, sm83]
 draft: false
 summary: Fourth Semester.
-gitlinks: [https://github.com/cs-25-sw-4-15/penguinlang]
+gitlinks: [https://https://github.com/cs-25-sw-4-15/penguinlang]
 ---
 
 # Penguin Lang (Spring 2025)

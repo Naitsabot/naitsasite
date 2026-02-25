@@ -5,7 +5,7 @@ slug: p1-chargepoint
 tags: [university, c]
 draft: false
 summary: First Semester.
-gitlinks: [github.com/cs-23-sw-1-p1-17/ChargepointPlacementFinder]
+gitlinks: [https://github.com/cs-23-sw-1-p1-17/ChargepointPlacementFinder]
 ---
 
 # Chargepoint Placement finder (Fall 2023)

@@ -1,4 +1,4 @@
-- [ ] Switch from string-built HTML to a real template engine (Nimja, Mustache, etc.)
+- [-] Switch from string-built HTML to a real template engine (Nimja, Mustache, etc.)
 - [ ] Add dev-mode auto-reload for markdown content (watch file mtimes or use a watcher)
 - [ ] Add tag pages: `/tags` and `/tags/:tag`
 - [ ] Add RSS feed for `/blog`
@@ -8,3 +8,17 @@
 - [ ] Add navigation / header configuration (links in config)
 - [ ] Add drafts handling rules (optional auth gating, or hide drafts always)
 - [ ] Add search (simple in-memory index first)
+- [ ] Make page faster for static content
+    - [ ] backend:
+        - [x] optimise images
+            - [x] Proc for generating thumbs of static images, using nimagemagick
+            - [x] Apply a filter/dithering to reduce size, and add fun effect
+            - [x] Save thumbnails in a seperate folder (public/img/thumbs/)
+        - [ ] gzip or Brotli compression for CSS, HTML, SVG ...
+        - [ ] set cache-control ehaders for static assets so browser caches them (if that is not already done)
+        - [ ] use lazy loading of images that arn't immediately visible
+        - [ ] keep embedded SVGs small. If they are large, link htem to external files
+    - [ ] frontend
+        - [x] image size
+            - [x] display thumbnails (on img with class="thumbable")
+            - [x] Add functionallity, that when thumb is clicked, the image is shown in large size in an overlay

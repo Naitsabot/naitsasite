@@ -18,9 +18,11 @@ proc htmlLayout*(title: string, body: string): string =
   """
     <body>
   """ &
+  renderHTMLTemplate("src/web/templates/filters.html") &
   renderHTMLTemplate("src/web/templates/header.html") &
   renderHTMLTemplate("src/web/templates/main.html", {"body":body}.toTable()) &
   renderHTMLTemplate("src/web/templates/footer.html") &
+  renderHTMLTemplate("src/web/templates/overlay.html") &
   """
     </body>
   </html>

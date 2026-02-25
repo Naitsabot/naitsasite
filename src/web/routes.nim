@@ -1,6 +1,7 @@
 import prologue
 import prologue/middlewares/staticfile
 from std/xmltree import escape 
+import std/tables
 
 import ../config
 import ../content/indexer
@@ -12,10 +13,9 @@ proc home(ctx: Context, store: ContentStore, cfg: SiteConfig) {.async.} =
   let latest_blogs = listCollection(store, "blog").head(5)
   let latest_projects = listCollection(store, "projects").head(5)
 
-  var body = "<h1>" & escape(cfg.siteTitle) & "</h1>" &
-              "<p>Hello there! Welcome to my website.</p>"
-    
-  body.add renderHTMLTemplate("src/web/templates/components/profile_pic.html")
+  var body = ""
+
+  body.add renderHTMLTemplate("src/web/templates/components/homepage.html", {"title": escape(cfg.siteTitle)}.toTable)
 
   body.add "<h2>Latest posts</h2><ul>"
   for d in latest_blogs:

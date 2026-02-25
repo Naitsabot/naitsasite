@@ -5,7 +5,7 @@ slug: p2-team
 tags: [university, js, node]
 draft: false
 summary: Second Semester.
-gitlinks: [github.com/cs-24-sw-2-p2-05/team-cohesion-tool]
+gitlinks: [https://github.com/cs-24-sw-2-p2-05/team-cohesion-tool]
 ---
 
 # Team Coheasion Tool (Spring 2024)
@@ -22,10 +22,13 @@ The aim of this project is to investigate how to increase team cohesion, which i
 
 ## Images
 
-![img](../public/img/p2/imp_login2.png "img")
-![img](../public/img/p2/imp_nav_view.png "img")
-![img](../public/img/p2/imp_info2.png "img")
-![img](../public/img/p2/imp_inter2.png "img")
-![img](../public/img/p2/imp_avi.png "img")
+<img src="/public/thumbs/p2/imp_login2.png" alt="img" title="Login Screen" class="thumbable" data-full="/public/img/p2/imp_login2.png">
 
+<img src="/public/thumbs/p2/imp_nav_view.png" alt="img" title="Navigation and Layout" class="thumbable" data-full="/public/img/p2/imp_nav_view.png">
+
+<img src="/public/thumbs/p2/imp_info2.png" alt="img" title="Information Page" class="thumbable" data-full="/public/img/p2/imp_info2.png">
+
+<img src="/public/thumbs/p2/imp_inter2.png" alt="img" title="Interests Page" class="thumbable" data-full="/public/img/p2/imp_inter2.png">
+
+<img src="/public/thumbs/p2/imp_avi.png" alt="img" title="Avaiability Page" class="thumbable" data-full="/public/img/p2/imp_avi.png">
 

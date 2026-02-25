@@ -5,7 +5,7 @@ slug: p3-kunsten
 tags: [university, java, springboot, svelte]
 draft: false
 summary: Third Semester.
-gitlinks: [github.com/cs-24-sw-3-09/KunstenCMSBackend, github.com/cs-24-sw-3-09/KunstenCMSFrontend]
+gitlinks: [https://github.com/cs-24-sw-3-09/KunstenCMSBackend, https://github.com/cs-24-sw-3-09/KunstenCMSFrontend]
 ---
 
 # Kunsten CMS (Fall 2024)
