@@ -4,4 +4,33 @@
     <title>{{title}}
     </title>
     <link rel='stylesheet' href='/public/css/style.css' />
+    <script>
+const prefetched = new Set();
+
+function prefetch(url) {
+    if (prefetched.has(url)) return;
+    prefetched.add(url);
+
+    const link = document.createElement("link");
+    link.rel = "prefetch";
+    link.href = url;
+    document.head.appendChild(link);
+}
+
+document.addEventListener("mouseover", (e) => {
+    const a = e.target.closest("a");
+    if (!a) return;
+
+    const href = a.getAttribute("href");
+    if (!href) return;
+
+    // Internal only: starts with / or same origin
+    const isInternal =
+        href.startsWith("/") ||
+        a.origin === window.location.origin;
+
+    if (isInternal) prefetch(a.href);
+});
+    </script>
 </head>
+

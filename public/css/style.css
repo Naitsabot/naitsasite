@@ -3,26 +3,56 @@
    ========================= */
 
 :root {
-  --link-color: #aaaaaa;
-  --p-font: monospace;
-  --p-font-size: 12pt;
-  --text-color: #000000;
+    --link-color: #aaaaaa;
+    --p-font: monospace;
+    --p-font-size: 12pt;
+    --text-color: #000000;
 
-  --color-bg: hsla(165, 0%, 100%, 1);
-  --color-link: rgb(10, 0, 0);
-  --color-text: #010635;
-  --color-link-hover: #fff;
-  --color-link-hover-bg: #000;
+    --color-bg: hsla(165, 0%, 100%, 1);
+    --color-link: rgb(10, 0, 0);
+    --color-text: #010635;
+    --color-link-hover: #fff;
+    --color-link-hover-bg: #000;
 
-  --code-bg: #f3f3f3;
+    --code-bg: #f3f3f3;
 
-  /* Gradient color variables (light mode) */
-  --grad-1: hsla(256, 82%, 77%, 0.35);
-  --grad-2: hsla(197, 77%, 74%, 0.35);
-  --grad-3: hsla(147, 77%, 74%, 0.35);
-  --grad-4: hsla(88, 77%, 74%, 0.35);
-  --grad-5: hsla(23, 77%, 74%, 0.35);
-  --grad-6: hsla(234, 100%, 50%, 0.35);
+    --button-height: 2.4em;
+
+    /* Gradient color variables (light mode) */
+    --grad-1: hsla(256, 82%, 77%, 0.35);
+    --grad-2: hsla(197, 77%, 74%, 0.35);
+    --grad-3: hsla(147, 77%, 74%, 0.35);
+    --grad-4: hsla(88, 77%, 74%, 0.35);
+    --grad-5: hsla(23, 77%, 74%, 0.35);
+    --grad-6: hsla(234, 100%, 50%, 0.35);
+}
+
+/* =========================
+   Dark Mode
+   ========================= */
+
+html.dark-mode,
+body.dark-mode {
+    --link-color: #8ab4f8;
+    --text-color: #e6e6e6;
+
+    --color-bg: rgb(10, 0, 0);
+    --color-link: #ffdbac;
+    --color-text: #e6e6e6;
+    --color-link-hover: #000000;
+    --color-link-hover-bg: #ffffff;
+
+    --code-bg: #1e1e1e;
+
+    /* Dark-mode gradient colors
+       Lower lightness + slightly lower opacity
+       to avoid glowing neon effect */
+    --grad-1: hsla(256, 60%, 40%, 0.25);
+    --grad-2: hsla(197, 60%, 38%, 0.25);
+    --grad-3: hsla(147, 55%, 35%, 0.25);
+    --grad-4: hsla(88, 55%, 32%, 0.25);
+    --grad-5: hsla(23, 60%, 38%, 0.25);
+    --grad-6: hsla(234, 80%, 45%, 0.25);
 }
 
 /* =========================
@@ -30,294 +60,265 @@
    ========================= */
 
 * {
-  font-family: var(--p-font);
-  font-size: var(--p-font-size);
+    font-family: var(--p-font);
+    font-size: var(--p-font-size);
 }
 
-html, body {
-  min-height: 100vh;
-  margin: 0;
+html,
+body {
+    min-height: 100vh;
+    margin: 0;
 
-  background-color: var(--color-bg);
-  background-image:
-    url("data:image/svg+xml,%3Csvg viewBox='0 0 962 962' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"),
-    radial-gradient(circle at 0% 0%, var(--grad-1) 3%, transparent 40%),
-    radial-gradient(circle at 20% 0%, var(--grad-2) 3%, transparent 40%),
-    radial-gradient(circle at 40% 0%, var(--grad-3) 3%, transparent 40%),
-    radial-gradient(circle at 60% 0%, var(--grad-4) 3%, transparent 40%),
-    radial-gradient(circle at 80% 0%, var(--grad-5) 3%, transparent 40%),
-    radial-gradient(circle at 100% 0%, var(--grad-6) 3%, transparent 40%);
+    background-color: var(--color-bg);
+    background-image:
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 962 962' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"),
+        radial-gradient(circle at 0% 0%, var(--grad-1) 3%, transparent 40%),
+        radial-gradient(circle at 20% 0%, var(--grad-2) 3%, transparent 40%),
+        radial-gradient(circle at 40% 0%, var(--grad-3) 3%, transparent 40%),
+        radial-gradient(circle at 60% 0%, var(--grad-4) 3%, transparent 40%),
+        radial-gradient(circle at 80% 0%, var(--grad-5) 3%, transparent 40%),
+        radial-gradient(circle at 100% 0%, var(--grad-6) 3%, transparent 40%);
 
-  background-blend-mode: overlay, normal, normal, normal, normal, normal, normal;
-  background-attachment: fixed;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
+    background-blend-mode: overlay, normal, normal, normal, normal, normal, normal;
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 100vh;
+    color: var(--color-text);
 }
 
 /* =========================
-   Dark Mode
+   Layout
    ========================= */
 
-html.dark-mode, body.dark-mode {
-
-  --link-color: #8ab4f8;
-  --text-color: #e6e6e6;
-
-  --color-bg: rgb(10, 0, 0);
-  --color-link: #ffdbac;
-  --color-text: #e6e6e6;
-  --color-link-hover: #000000;
-  --color-link-hover-bg: #ffffff;
-
-  --code-bg: #1e1e1e;
-  
-  /* Dark-mode gradient colors
-     Lower lightness + slightly lower opacity
-     to avoid glowing neon effect */
-  --grad-1: hsla(256, 60%, 40%, 0.25);
-  --grad-2: hsla(197, 60%, 38%, 0.25);
-  --grad-3: hsla(147, 55%, 35%, 0.25);
-  --grad-4: hsla(88, 55%, 32%, 0.25);
-  --grad-5: hsla(23, 60%, 38%, 0.25);
-  --grad-6: hsla(234, 80%, 45%, 0.25);
-}
-
-
-body {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  min-height: 100vh;
-  color: var(--color-text);
-}
-
-/* Layout */
 .main-layout {
-  box-sizing: border-box;
-  display: flex;
-  flex: 1 0 auto;
-  flex-direction: row;
-  justify-content: center;
-  margin: 0 auto;
-  width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: row;
+    justify-content: center;
+    margin: 0 auto;
+    width: 100%;
 }
 
 .main-content {
-  box-sizing: border-box;
-  flex: 1 1 0%;
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 800px;
-  min-width: 0;
-  padding: 1em;
-  width: 100%;
+    box-sizing: border-box;
+    flex: 1 1 0%;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 800px;
+    min-width: 0;
+    padding: 1em;
+    width: 100%;
 }
 
-.sidebar-left, .sidebar-right {
-  background: none;
-  box-sizing: border-box;
-  /* color: #333; */
-  flex: 0 0 180px;
-  max-width: 180px;
-  min-width: 120px;
-  padding: 1em;
-}
-
-.sidebar-left {
-  /* border-right: 1px solid #e0e0e0; */
-}
-
+.sidebar-left,
 .sidebar-right {
-  /* border-left: 1px solid #e0e0e0; */
+    background: none;
+    box-sizing: border-box;
+    flex: 0 0 180px;
+    max-width: 180px;
+    min-width: 120px;
+    padding: 1em;
 }
 
 main {
-  box-sizing: border-box;
-  max-width: 800px;
-  width: 100%;
+    box-sizing: border-box;
+    max-width: 800px;
+    width: 100%;
 }
 
 header {
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 800px;
-  padding: 20px;
-  text-align: center;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 20px 0;
 }
 
-/* Push theme toggle to right */
-#themeToggle {
-  position: absolute;
-  right: 20px;
-  top: 20px;
-}
-
-/* =========================
-   Nav Links Styled Like Buttons
-   ========================= */
-
-.nav-links {
-  display: flex;
-  gap: 0.75em;
-}
-
-.nav-links a {
-  text-decoration: none;
-  display: inline-block;
-
-  padding: 0.6em 1.2em;
-
-  border: 2px solid var(--color-link);
-  border-radius: 0;
-
-  color: var(--color-link);
-  background: transparent;
-
-  transition:
-    background-color 0.2s ease,
-    color 0.2s ease,
-    transform 0.05s ease;
-}
-
-/* Hover fill */
-.nav-links a:hover {
-  background-color: var(--color-link);
-  color: var(--color-bg);
-}
-
-/* Click effect */
-.nav-links a:active {
-  transform: scale(0.96);
+.header-inner {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 800px;
+    padding: 0 1em;
+    box-sizing: border-box;
 }
 
 footer {
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 800px;
-  padding: 20px;
-  text-align: center;
-}
-
-/* Typography & elements */
-a {
-  color: var(--color-link);
-  opacity: .7;
-  outline: none;
-  transition: all .1s ease;
-}
-
-a:hover {
-  background-color: var(--color-link-hover-bg);
-  color: var(--color-link-hover);
-  opacity: 1;
-}
-
-code {
-  background: var(--code-bg);
-  padding: 0.1rem 0.25rem;
-}
-
-.about_pic {
-  border-radius: 8px;
-  filter: url(#profile_filter);
-  width: 200px;
-}
-
-svg {
-  height: 0;
-  position: absolute;
-  width: 0;
-}
-
-.md-doc img {
-  display: block;
-  margin: auto;
-  width: auto;
-  max-width: 600px;
-  max-height: 256px;
-}
-
-/* Media queries */
-@media (max-width: 1000px) {
-  .sidebar-right {
-    display: none;
-  }
-
-  .sidebar-left {
-    display: none;
-  }
-
-  .main-layout {
-    max-width: 100vw;
-  }
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 800px;
+    padding: 20px;
+    text-align: center;
 }
 
 /* =========================
-   Outline Button
+   Navigation
+   ========================= */
+
+.nav-links {
+    display: flex;
+    gap: 0.75em;
+}
+
+.nav-links a {
+    text-decoration: none;
+    display: inline-block;
+    box-sizing: border-box;
+    height: var(--button-height);
+    line-height: var(--button-height);
+    padding: 0 1.2em;
+    border: 2px solid var(--color-link);
+    border-radius: 0;
+    color: var(--color-link);
+    opacity: 1;
+    background: transparent;
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.05s ease;
+}
+
+.nav-links a:hover {
+    background-color: var(--color-link);
+    color: var(--color-bg);
+}
+
+.nav-links a:active {
+    transform: scale(0.96);
+}
+
+/* =========================
+   Buttons
    ========================= */
 
 button,
 .button {
-  appearance: none;
-  background: transparent;
-
-  border: 2px solid var(--color-link);
-  border-radius: 0; /* square */
-
-  color: var(--color-link);
-
-  padding: 0.6em 1.2em;
-  cursor: pointer;
-
-  font-family: var(--p-font);
-  font-size: var(--p-font-size);
-
-  transition:
-    background-color 0.2s ease,
-    color 0.2s ease,
-    transform 0.05s ease,
-    opacity 0.15s ease;
-
-  display: inline-block;
+    appearance: none;
+    background: transparent;
+    border: 2px solid var(--color-link);
+    border-radius: 0;
+    color: var(--color-link);
+    box-sizing: border-box;
+    height: var(--button-height);
+    line-height: var(--button-height);
+    padding: 0 1.2em;
+    cursor: pointer;
+    font-family: var(--p-font);
+    font-size: var(--p-font-size);
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.05s ease,
+        opacity 0.15s ease;
+    display: inline-block;
 }
 
-/* Hover → fill */
 button:hover,
 .button:hover {
-  background-color: var(--color-link);
-  color: var(--color-bg);
+    background-color: var(--color-link);
+    color: var(--color-bg);
 }
 
-/* Click press */
 button:active,
 .button:active {
-  transform: scale(0.96);
+    transform: scale(0.96);
 }
 
-/* Focus accessibility */
 button:focus-visible,
 .button:focus-visible {
-  outline: 2px solid var(--color-text);
-  outline-offset: 2px;
+    outline: 2px solid var(--color-text);
+    outline-offset: 2px;
 }
 
-/* Disabled */
 button:disabled,
 .button:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-  transform: none;
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none;
 }
 
 .button-ghost {
-  background: transparent;
-  color: var(--color-text);
-  border: 1px solid var(--color-text);
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-text);
 }
 
 .button-ghost:hover {
-  background-color: var(--color-text);
-  color: var(--color-bg);
+    background-color: var(--color-text);
+    color: var(--color-bg);
 }
 
+/* =========================
+   Typography & Elements
+   ========================= */
+
+a {
+    color: var(--color-link);
+    opacity: 0.7;
+    outline: none;
+    transition: all 0.1s ease;
+}
+
+a:hover {
+    background-color: var(--color-link-hover-bg);
+    color: var(--color-link-hover);
+    opacity: 1;
+}
+
+code {
+    background: var(--code-bg);
+    padding: 0.1rem 0.25rem;
+}
+
+/* =========================
+   Misc / Utilities
+   ========================= */
+
+.about_pic {
+    border-radius: 8px;
+    filter: url(#profile_filter);
+    width: 200px;
+}
+
+svg {
+    height: 0;
+    position: absolute;
+    width: 0;
+}
+
+.md-doc img {
+    display: block;
+    margin: auto;
+    width: auto;
+    max-width: 600px;
+    max-height: 256px;
+}
+
+/* =========================
+   Media Queries
+   ========================= */
+
+@media (max-width: 1000px) {
+    .sidebar-right {
+        display: none;
+    }
+
+    .sidebar-left {
+        display: none;
+    }
+
+    .main-layout {
+        max-width: 100vw;
+    }
+}
