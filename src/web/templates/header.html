@@ -1,7 +1,23 @@
 <header>
-    <nav>
-        <a href='/'>Home</a> |
-        <a href='/blog'>Blog</a> |
-        <a href='/projects'>Projects</a>
+    <nav class="nav-links">
+        <a href="/">Home</a>
+        <a href="/blog">Blog</a>
+        <a href="/projects">Projects</a>
     </nav>
+
+    <button id="themeToggle">🌓</button>
 </header>
+
+<script>
+const root = document.documentElement;
+const btn = document.getElementById('themeToggle');
+function setMode(dark) {
+  root.classList.toggle('dark-mode', dark);
+  localStorage.setItem('darkMode', dark ? '1' : '0');
+}
+btn.onclick = () => setMode(!root.classList.contains('dark-mode'));
+if (localStorage.getItem('darkMode') === '1' ||
+    (localStorage.getItem('darkMode') === null && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+  setMode(true);
+}
+</script>

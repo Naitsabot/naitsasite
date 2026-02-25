@@ -1,6 +1,6 @@
 ---
 title: P1 AAU project - Chargepoint Placement Finder
-date: 2026-02-21
+date: 2026-02-24
 slug: p1-chargepoint
 tags: [university, c]
 draft: false

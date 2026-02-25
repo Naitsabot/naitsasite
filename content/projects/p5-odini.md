@@ -1,6 +1,6 @@
 ---
 title: P5 AAU project - Enriching Dataset Metadata in ODINI
-date: 2026-02-21
+date: 2026-02-25
 slug: p5-odini
 tags: [university, pyhton, fastapi, bigquery, ]
 draft: false

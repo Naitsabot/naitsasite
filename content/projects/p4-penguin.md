@@ -1,6 +1,6 @@
 ---
 title: P4 AAU project - Penguin Lang for the Nintendo Game Boy
-date: 2026-02-21
+date: 2026-02-24
 slug: p4-penguin
 tags: [university, pyhton, sm83]
 draft: false

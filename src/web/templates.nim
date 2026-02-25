@@ -9,24 +9,17 @@ proc renderHTMLTemplate*(templatePath: string, vars: Table[string, string] = ini
     temp = temp.replace("{{" & key & "}}", value)
   result = temp
 
+
 proc htmlLayout*(title: string, body: string): string =
-  """
-  <!doctype html>
-  <html lang='en'>
-  """ &
-  renderHTMLTemplate("src/web/templates/head.html", {"title":escape(title)}.toTable()) &
-  """
-    <body>
-  """ &
-  renderHTMLTemplate("src/web/templates/filters.html") &
-  renderHTMLTemplate("src/web/templates/header.html") &
-  renderHTMLTemplate("src/web/templates/main.html", {"body":body}.toTable()) &
-  renderHTMLTemplate("src/web/templates/footer.html") &
-  renderHTMLTemplate("src/web/templates/overlay.html") &
-  """
-    </body>
-  </html>
-  """
+  renderHTMLTemplate("src/web/templates/doc.html", {
+    "meta": renderHTMLTemplate("src/web/templates/head.html", {"title":escape(title)}.toTable()),
+    "body": renderHTMLTemplate("src/web/templates/filters.html") &
+            renderHTMLTemplate("src/web/templates/header.html") &
+            renderHTMLTemplate("src/web/templates/main.html", {"body":body}.toTable()) &
+            renderHTMLTemplate("src/web/templates/footer.html") &
+            renderHTMLTemplate("src/web/templates/overlay.html")
+    }.toTable()) 
+
 
 proc docPage*(doc: Document): string =
   let head = "<h1>" & escape(doc.meta.title) & "</h1>"
@@ -47,6 +40,7 @@ proc docPage*(doc: Document): string =
     else:
       ""
   head & date & gitlinks & "<div class=\"md-doc\">" & doc.bodyHtml & "</div>"
+
 
 proc docListItem*(collectionRoutePrefix: string, doc: Document): string =
   let url = collectionRoutePrefix & "/" & doc.meta.slug

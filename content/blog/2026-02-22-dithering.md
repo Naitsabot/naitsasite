@@ -1,7 +1,7 @@
 ---
 title: I love dithering
 date: 2026-02-21
-slug: hello-there
+slug: dithering
 tags: []
 draft: false
 summary: Dithering on Naitsasite.
