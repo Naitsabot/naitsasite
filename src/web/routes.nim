@@ -9,6 +9,7 @@ import ../content/types
 import ./templates
 from ../utils/seqs import head
 
+
 proc home(ctx: Context, store: ContentStore, cfg: SiteConfig) {.async.} =
   let latest_blogs = listCollection(store, "blog").head(5)
   let latest_projects = listCollection(store, "projects").head(5)
@@ -74,6 +75,13 @@ proc projects_slug(ctx: Context, store: ContentStore, cfg: SiteConfig) {.async.}
     resp htmlLayout("Not found", "<h1>404</h1><p>Project doc not found.</p>")
 
 
+proc sec_vault(ctx: Context, store: ContentStore, cfg: Siteconfig) {.async.} =
+  var body = renderHTMLTemplate("src/web/templates/components/sec-login.html")
+  resp htmlLayout(cfg.siteTitle, body)
+  
+
+
+
 proc setupRoutes*(app: var Prologue, store: ContentStore, cfg: SiteConfig = defaultSiteConfig) =
   # Serve static files (css, images, etc.)
   app.use(staticFileMiddleware(@["public"]))
@@ -85,3 +93,6 @@ proc setupRoutes*(app: var Prologue, store: ContentStore, cfg: SiteConfig = defa
   
   app.get("/projects", proc(ctx: Context) {.async.} = await projects(ctx, store, cfg))
   app.get("/projects/{slug}", proc(ctx: Context) {.async.} = await projects_slug(ctx, store, cfg))
+
+  # SEC
+  app.get("/vault", proc(ctx: Context) {.async.} = await sec_vault(ctx, store, cfg))
