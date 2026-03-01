@@ -14,7 +14,7 @@
             - [x] Proc for generating thumbs of static images, using nimagemagick
             - [x] Apply a filter/dithering to reduce size, and add fun effect
             - [x] Save thumbnails in a seperate folder (public/img/thumbs/)
-        - [ ] gzip or Brotli compression for CSS, HTML, SVG ...
+        - [ ] **gzip** or Brotli compression for CSS, HTML, SVG ...
         - [ ] set cache-control ehaders for static assets so browser caches them (if that is not already done)
         - [ ] use lazy loading of images that arn't immediately visible
         - [ ] keep embedded SVGs small. If they are large, link htem to external files

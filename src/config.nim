@@ -17,6 +17,6 @@ const defaultSiteConfig* = SiteConfig(
     baseUrl: "",
     collections: @[
         CollectionConfig(name: "blog", dir: "content/blog", routePrefix: "/blog", sortByDateDesc: true),
-        CollectionConfig(name: "projects", dir: "content/projects", routePrefix: "/projects", sortByDateDesc: false)
+        CollectionConfig(name: "projects", dir: "content/projects", routePrefix: "/projects", sortByDateDesc: true)
     ]
 )
