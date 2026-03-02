@@ -1,0 +1,160 @@
+<!-- Password Vault Component -->
+<div class="vault">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <h2>Password Vault</h2>
+    <a href="/api/logout">Logout</a>
+  </div>
+
+  <div id="vault-key-warning" class="auth-notice auth-err" style="display:none">
+    Session key not found — please <a href="/vault-login">log in again</a> to decrypt entries.
+  </div>
+
+  <h3>Add Entry</h3>
+  <form id="add-entry-form">
+    <label for="entry-site">Site / Service</label>
+    <input type="text" id="entry-site" required autocomplete="off">
+    <label for="entry-login">Username / Email</label>
+    <input type="text" id="entry-login" required autocomplete="off">
+    <label for="entry-password">Password</label>
+    <input type="password" id="entry-password" required autocomplete="new-password">
+    <button type="submit">Add Password</button>
+  </form>
+
+  <h3>Stored Passwords</h3>
+  <table id="vault-table">
+    <thead>
+      <tr>
+        <th>Site</th>
+        <th>Username</th>
+        <th>Password</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody id="vault-body">
+      <tr id="vault-loading"><td colspan="5">Loading…</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<script>
+// ── Crypto helpers ─────────────────────────────────────────────────────────
+
+async function importKeyFromJwk(jwk) {
+  return crypto.subtle.importKey("jwk", jwk,
+    { name: "AES-GCM" }, false, ["encrypt", "decrypt"]);
+}
+
+async function encryptText(plaintext, key) {
+  const iv  = crypto.getRandomValues(new Uint8Array(12));
+  const enc = new TextEncoder();
+  const ct  = await crypto.subtle.encrypt({ name: "AES-GCM", iv }, key, enc.encode(plaintext));
+  const b64 = (buf) => btoa(String.fromCharCode(...new Uint8Array(buf)));
+  return b64(iv.buffer) + ":" + b64(ct);
+}
+
+async function decryptText(combined, key) {
+  const [ivB64, ctB64] = combined.split(":");
+  const fromB64 = (s) => Uint8Array.from(atob(s), c => c.charCodeAt(0));
+  try {
+    const dec = await crypto.subtle.decrypt(
+      { name: "AES-GCM", iv: fromB64(ivB64) }, key, fromB64(ctB64));
+    return new TextDecoder().decode(dec);
+  } catch {
+    return "(decryption failed)";
+  }
+}
+
+// ── Vault rendering ────────────────────────────────────────────────────────
+
+async function loadVault(key) {
+  const resp = await fetch("/api/vault-entries", { credentials: "same-origin" });
+  if (resp.status === 401) { location.href = "/vault-login"; return; }
+  const entries = await resp.json();
+
+  const tbody = document.getElementById("vault-body");
+  document.getElementById("vault-loading")?.remove();
+  tbody.innerHTML = "";
+
+  if (entries.length === 0) {
+    tbody.innerHTML = "<tr><td colspan='5'>No entries yet.</td></tr>";
+    return;
+  }
+
+  for (const e of entries) {
+    const decrypted = key ? await decryptText(e.ciphertext, key) : "(no key)";
+    const tr = document.createElement("tr");
+    tr.dataset.id = e.id;
+    tr.innerHTML = `
+      <td>${escHtml(e.site)}</td>
+      <td>${escHtml(e.login)}</td>
+      <td><input type="password" value="${escHtml(decrypted)}" readonly class="vault-pw-field"></td>
+      <td><button type="button" onclick="togglePw(this)">Show</button></td>
+      <td><button type="button" onclick="deleteEntry('${e.id}')">Delete</button></td>`;
+    tbody.appendChild(tr);
+  }
+}
+
+function togglePw(btn) {
+  const input = btn.closest("tr").querySelector(".vault-pw-field");
+  if (input.type === "password") { input.type = "text"; btn.textContent = "Hide"; }
+  else { input.type = "password"; btn.textContent = "Show"; }
+}
+
+async function deleteEntry(id) {
+  if (!confirm("Delete this entry?")) return;
+  const resp = await fetch("/api/vault-entries/" + id, {
+    method: "DELETE", credentials: "same-origin"
+  });
+  if (resp.ok) {
+    document.getElementById("vault-body")
+      .querySelectorAll("tr").forEach(tr => { if (tr.dataset.id == id) tr.remove(); });
+  }
+}
+
+function escHtml(s) {
+  return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;")
+                  .replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
+
+// ── Main ───────────────────────────────────────────────────────────────────
+
+(async () => {
+  const stored = sessionStorage.getItem("vaultKey");
+  let key = null;
+
+  if (stored) {
+    try { key = await importKeyFromJwk(JSON.parse(stored)); }
+    catch { /* invalid — show warning below */ }
+  }
+
+  if (!key) {
+    document.getElementById("vault-key-warning").style.display = "";
+  }
+
+  await loadVault(key);
+
+  document.getElementById("add-entry-form").addEventListener("submit", async (ev) => {
+    ev.preventDefault();
+    if (!key) { alert("No encryption key — please log in again."); return; }
+
+    const site       = document.getElementById("entry-site").value.trim();
+    const login      = document.getElementById("entry-login").value.trim();
+    const password   = document.getElementById("entry-password").value;
+    const ciphertext = await encryptText(password, key);
+
+    const body = new URLSearchParams({ site, login, ciphertext });
+    const resp = await fetch("/api/vault-entries", {
+      method: "POST", credentials: "same-origin",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body
+    });
+    if (resp.ok) {
+      ev.target.reset();
+      await loadVault(key);
+    } else {
+      alert("Failed to add entry.");
+    }
+  });
+})();
+</script>

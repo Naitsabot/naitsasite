@@ -22,3 +22,28 @@
         - [x] image size
             - [x] display thumbnails (on img with class="thumbable")
             - [x] Add functionallity, that when thumb is clicked, the image is shown in large size in an overlay
+
+
+
+What's implemented so far:
+
+✅ User registration + bcrypt password hashing
+✅ Login → HttpOnly JWT cookie → redirect to /vault
+✅ /vault protected, redirects to /vault-login if not authed
+✅ Vault entries stored encrypted in DB, decrypted client-side with AES-GCM (server never sees the key)
+✅ PBKDF2 key derived from password in browser on login, stored in sessionStorage
+✅ Add / delete vault entries via JS fetch
+✅ /reviews page — public read, post requires login
+✅ /api/logout clears cookie
+What still needs doing:
+
+End-to-end browser test — run nimble run, register a user, log in, confirm the cookie appears in DevTools, add a vault entry and check it round-trips correctly (encrypt → store → fetch → decrypt)
+
+Handle missing sessionStorage key gracefully — if a user navigates directly to /vault with a valid cookie but no key in sessionStorage (e.g. opened a new tab), they see a warning but can't decrypt. You may want to redirect them back to login in that case, or prompt for their password again to re-derive the key
+
+Public visibility of reviews — currently /reviews is readable without login, which is correct, but verify this matches your requirements
+
+Delete the stale psw.db if it still exists from before the bcrypt fix, otherwise old test users will fail to log in:
+`rm psw.db && nimble run`
+
+
