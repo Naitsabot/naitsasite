@@ -203,7 +203,7 @@ proc apiDeleteVaultEntry(ctx: Context, db: DbConn) {.async.} =
 
 # ── Reviews ───────────────────────────────────────────────────────────────────
 
-proc reviewsPage(ctx: Context, db: DbConn, cfg: SiteConfig) {.async.} =
+proc vault_reviews(ctx: Context, db: DbConn, cfg: SiteConfig) {.async.} =
   let maybeUser = requireAuth(ctx)
   let rows = getReviews(db)
   var reviewsHtml = ""
@@ -218,7 +218,7 @@ proc reviewsPage(ctx: Context, db: DbConn, cfg: SiteConfig) {.async.} =
 
   let formHtml =
     if maybeUser.isSome:
-      """<form action="/api/reviews" method="post" style="margin-bottom:2em;">
+      """<form action="/api/vault-reviews" method="post" style="margin-bottom:2em;">
         <label for="review-text">Leave a review:</label>
         <textarea id="review-text" name="review_text" rows="4"
           style="width:100%;box-sizing:border-box;padding:0.5em;
@@ -231,7 +231,7 @@ proc reviewsPage(ctx: Context, db: DbConn, cfg: SiteConfig) {.async.} =
     else:
       "<p><a href=\"/vault-login\">Log in</a> to leave a review.</p>"
 
-  let body = renderHTMLTemplate("src/web/templates/components/reviews.html",
+  let body = renderHTMLTemplate("src/web/templates/components/sec-reviews.html",
     {"reviews": reviewsHtml, "form": formHtml}.toTable)
   resp htmlLayout("Reviews - " & cfg.siteTitle, body)
 
@@ -243,10 +243,10 @@ proc apiAddReview(ctx: Context, db: DbConn) {.async.} =
     return
   let text = ctx.getPostParams("review_text")
   if text.strip().len == 0:
-    sendRedirect(ctx, "/reviews?error=empty")
+    sendRedirect(ctx, "/vault-reviews?error=empty")
     return
   discard addReview(db, maybeUser.get, text.strip())
-  sendRedirect(ctx, "/reviews")
+  sendRedirect(ctx, "/vault-reviews")
 
 
 proc setupRoutes*(app: var Prologue, store: ContentStore, db: DbConn, cfg: SiteConfig = defaultSiteConfig) =
@@ -276,5 +276,5 @@ proc setupRoutes*(app: var Prologue, store: ContentStore, db: DbConn, cfg: SiteC
   app.delete("/api/vault-entries/{id}", proc(ctx: Context) {.async.} = await apiDeleteVaultEntry(ctx, db))
 
   # Reviews
-  app.get("/reviews",       proc(ctx: Context) {.async.} = await reviewsPage(ctx, db, cfg))
-  app.post("/api/reviews",  proc(ctx: Context) {.async.} = await apiAddReview(ctx, db))
+  app.get("/vault-reviews",       proc(ctx: Context) {.async.} = await vault_reviews(ctx, db, cfg))
+  app.post("/api/vault-reviews",  proc(ctx: Context) {.async.} = await apiAddReview(ctx, db))
