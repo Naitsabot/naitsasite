@@ -29,7 +29,7 @@ proc blog_slug(ctx: Context, store: ContentStore, cfg: SiteConfig) {.async.} =
   let slug = ctx.getPathParams("slug")
   let found = findDoc(store, "blog", slug)
   if found.isSome:
-    resp htmlLayout(found.get.meta.title, viewBlogPost(found.get))
+    resp htmlLayout(found.get.meta.title & "- Blog - " & cfg.siteTitle, viewBlogPost(found.get))
   else:
     ctx.response.code = Http404
     resp htmlLayout("Not found", viewNotFound("Post not found."))
@@ -44,7 +44,7 @@ proc projects_slug(ctx: Context, store: ContentStore, cfg: SiteConfig) {.async.}
   let slug = ctx.getPathParams("slug")
   let found = findDoc(store, "projects", slug)
   if found.isSome:
-    resp htmlLayout(found.get.meta.title, viewProjectsPost(found.get))
+    resp htmlLayout(found.get.meta.title & " - Projects - " & cfg.siteTitle, viewProjectsPost(found.get))
   else:
     ctx.response.code = Http404
     resp htmlLayout("Not found", viewNotFound("Project not found."))
@@ -52,6 +52,10 @@ proc projects_slug(ctx: Context, store: ContentStore, cfg: SiteConfig) {.async.}
 
 proc setupRoutes*(app: var Prologue, store: ContentStore, cfg: SiteConfig = defaultSiteConfig) =
   app.use(staticFileMiddleware(@["public"]))
+  
+  app.get("/favicon.ico", redirectTo("public/favicon.png"))
+  app.get("/robots.txt", redirectTo("public/robots.txt"))
+  app.get("/sitemap.xml", redirectTo("public/sitemap.xml"))
 
   app.get("/", proc(ctx: Context) {.async.} = await home(ctx, store, cfg))
 
