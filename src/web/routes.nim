@@ -1,24 +1,29 @@
+# Third-party imports
 import prologue
 import prologue/middlewares/staticfile
 
+# Local imports
 import ../config
 import ../content/indexer
 import ../content/types
 import ./templates
-import ./views/home as homeView
 import ./views/blog as blogView
-import ./views/projects as projectsView
 import ./views/error as errorView
+import ./views/home as homeView
+import ./views/projects as projectsView
 from ../utils/seqs import head
+
 
 proc home(ctx: Context, store: ContentStore, cfg: SiteConfig) {.async.} =
   let latest_blogs = listCollection(store, "blog").head(5)
   let latest_projects = listCollection(store, "projects").head(5)
   resp htmlLayout(cfg.siteTitle, viewHome(cfg.siteTitle, latest_blogs, latest_projects))
 
+
 proc blog(ctx: Context, store: ContentStore, cfg: SiteConfig) {.async.} =
   let posts = listCollection(store, "blog")
   resp htmlLayout("Blog - " & cfg.siteTitle, viewBlogList(posts))
+
 
 proc blog_slug(ctx: Context, store: ContentStore, cfg: SiteConfig) {.async.} =
   let slug = ctx.getPathParams("slug")
@@ -29,9 +34,11 @@ proc blog_slug(ctx: Context, store: ContentStore, cfg: SiteConfig) {.async.} =
     ctx.response.code = Http404
     resp htmlLayout("Not found", viewNotFound("Post not found."))
 
+
 proc projects(ctx: Context, store: ContentStore, cfg: SiteConfig) {.async.} =
   let docs = listCollection(store, "projects")
   resp htmlLayout("Projects - " & cfg.siteTitle, viewProjectsList(docs))
+
 
 proc projects_slug(ctx: Context, store: ContentStore, cfg: SiteConfig) {.async.} =
   let slug = ctx.getPathParams("slug")
@@ -41,6 +48,7 @@ proc projects_slug(ctx: Context, store: ContentStore, cfg: SiteConfig) {.async.}
   else:
     ctx.response.code = Http404
     resp htmlLayout("Not found", viewNotFound("Project not found."))
+
 
 proc setupRoutes*(app: var Prologue, store: ContentStore, cfg: SiteConfig = defaultSiteConfig) =
   app.use(staticFileMiddleware(@["public"]))

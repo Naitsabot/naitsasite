@@ -1,10 +1,14 @@
-import std/sequtils
+# Standard library imports
+from std/sequtils import mapIt
 from std/strutils import join
-import std/tables
-import std/xmltree
-import ../templates
+from std/tables import toTable
+from std/xmltree import escape
+
+# Local imports
 import ../../content/types
+import ../templates
 import ./shared
+
 
 proc viewProjectsList*(docs: seq[Document]): string =
   let items = docs.mapIt(
@@ -12,6 +16,7 @@ proc viewProjectsList*(docs: seq[Document]): string =
       {"url": "/projects/" & it.meta.slug, "title": xmltree.escape(it.meta.title)}.toTable)
   ).join("")
   renderHTMLTemplate("src/web/templates/pages/projects_list.html", {"items": items}.toTable)
+
 
 proc viewProjectsPost*(doc: Document): string =
   renderHTMLTemplate("src/web/templates/pages/projects_post.html", {

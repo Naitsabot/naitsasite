@@ -1,4 +1,5 @@
-import std/tables
+# Standard library imports
+from std/tables import Table
 
 
 type

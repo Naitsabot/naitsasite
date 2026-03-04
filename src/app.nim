@@ -1,8 +1,11 @@
+# Third-party imports
 import prologue
 
+# Local imports
 import ./content/indexer
-import ./web/routes
 import ./utils/thumbs
+import ./web/routes
+
 
 proc main() =
     # Ensure thumbnails for all images
@@ -14,6 +17,7 @@ proc main() =
     var app = newApp(settings = newSettings(appName = "naitsasite"))
     setupRoutes(app, store)
     app.run()
+
 
 when isMainModule:
     main()

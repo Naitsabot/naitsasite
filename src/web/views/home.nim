@@ -1,9 +1,13 @@
-import std/sequtils
+# Standard library imports
+from std/sequtils import mapIt
 from std/strutils import join
-import std/tables
-import std/xmltree
-import ../templates
+from std/tables import toTable
+from std/xmltree import escape
+
+# Local imports
 import ../../content/types
+import ../templates
+
 
 proc viewHome*(title: string, blogs: seq[Document], projects: seq[Document]): string =
   let blogItems = blogs.mapIt(

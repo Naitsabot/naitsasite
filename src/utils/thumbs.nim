@@ -1,5 +1,7 @@
-import os
-import std/[strutils]
+# Standard library imports
+from os import `/`, execShellCmd, createDir, dirExists, fileExists, parentDir, relativePath, walkDirRec
+from std/strutils import endsWith, join
+
 
 proc generateThumbnail*(srcPath, destPath: string, width = 256, height = 256) =
   let cmd = "magick " & srcPath &
@@ -8,13 +10,16 @@ proc generateThumbnail*(srcPath, destPath: string, width = 256, height = 256) =
     destPath
   discard execShellCmd(cmd)
 
+
 proc ensureThumbnails*(imgDir, thumbDir: string, width = 256, height = 256) =
+  ## Example usage:
+  ## ensureThumbnails("public/img", "public/thumbs")
   if not dirExists(thumbDir):
     createDir(thumbDir)
 
   for path in walkDirRec(imgDir):
     if path.endsWith(".png") or path.endsWith(".jpg") or path.endsWith(".jpeg"):
-      let relPath = relativePath(path, imgDir)
+      let relPath: string = relativePath(path, imgDir)
       let thumbPath = thumbDir / relPath
       let thumbParent = thumbPath.parentDir()
 
@@ -23,6 +28,3 @@ proc ensureThumbnails*(imgDir, thumbDir: string, width = 256, height = 256) =
 
       if not fileExists(thumbPath):
         generateThumbnail(path, thumbPath, width, height)
-
-# Example usage:
-# ensureThumbnails("public/img", "public/thumbs")
