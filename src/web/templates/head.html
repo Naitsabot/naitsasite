@@ -1,9 +1,24 @@
 <head>
     <meta charset='utf-8' />
     <meta name='viewport' content='width=device-width, initial-scale=1' />
-    <title>{{title}}
-    </title>
+    
+    <title>{{title}}</title>
+    
+    <!-- Solves problem of page flashabning user when in darkmode, while navigating thereby loading/reloading other page -->
+    <!-- https://dev.to/javascriptwizzard/dark-mode-done-right-performance-accessibility-considerations-43b1 -->
+    <!-- Dark mode must be applied before CSS to prevent flash. This script is synchronous and blocking by design. -->
+    <script>
+(function() {
+    var stored = localStorage.getItem('darkMode');
+    var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (stored === '1' || (stored === null && prefersDark)) {
+        document.documentElement.classList.add('dark-mode');
+    }
+})();
+    </script>
+    
     <link rel='stylesheet' href='/public/css/style.css' />
+
     <script>
 const prefetched = new Set();
 

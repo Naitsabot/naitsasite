@@ -1,16 +1,14 @@
 version       = "0.1.0"
 author        = "Naitsabot"
-description   = "Nim + Prologue site"
+description   = "Personal site written in Nim + Prologue"
 license       = "MIT"
 
-requires "nim >= 2.2.6"
-requires "db_connector"
-requires "prologue"
-requires "yaml"
-requires "markdown" # from https://github.com/soasme/nim-markdown (nimble name is commonly "markdown")
+requires "nim >= 2.2.6" # https://nim-lang.org/
+requires "prologue >= 0.6.8" # https://github.com/planety/Prologue
+requires "yaml >= 2.2.1" # https://github.com/flyx/NimYAML 
+requires "markdown >= 0.8.8" # https://github.com/soasme/nim-markdown
 requires "jwt"
 requires "bcrypt"
-
 
 srcDir = "src"
 bin    = @["app"]

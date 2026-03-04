@@ -31,6 +31,30 @@
    Dark Mode
    ========================= */
 
+/* CSS fallback for first-time visitors before JS has a chance to run.
+   Once the user has a stored preference, the JS class takes over. */
+@media (prefers-color-scheme: dark) {
+    :root:not(.dark-mode):not(.light-mode) {
+        --link-color: #8ab4f8;
+        --text-color: #e6e6e6;
+
+        --color-bg: rgb(10, 0, 0);
+        --color-link: #ffdbac;
+        --color-text: #e6e6e6;
+        --color-link-hover: #000000;
+        --color-link-hover-bg: #ffffff;
+
+        --code-bg: #1e1e1e;
+
+        --grad-1: hsla(256, 60%, 40%, 0.25);
+        --grad-2: hsla(197, 60%, 38%, 0.25);
+        --grad-3: hsla(147, 55%, 35%, 0.25);
+        --grad-4: hsla(88, 55%, 32%, 0.25);
+        --grad-5: hsla(23, 60%, 38%, 0.25);
+        --grad-6: hsla(234, 80%, 45%, 0.25);
+    }
+}
+
 html.dark-mode,
 body.dark-mode {
     --link-color: #8ab4f8;
@@ -53,6 +77,19 @@ body.dark-mode {
     --grad-4: hsla(88, 55%, 32%, 0.25);
     --grad-5: hsla(23, 60%, 38%, 0.25);
     --grad-6: hsla(234, 80%, 45%, 0.25);
+}
+
+/* =========================
+   Animations
+   ========================= */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 /* =========================
@@ -122,6 +159,7 @@ body {
     min-width: 0;
     padding: 1em;
     width: 100%;
+    animation: fadeIn 0.6s ease-in;
 }
 
 .sidebar-left,

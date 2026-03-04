@@ -17,8 +17,4 @@ function setMode(dark) {
   localStorage.setItem('darkMode', dark ? '1' : '0');
 }
 btn.onclick = () => setMode(!root.classList.contains('dark-mode'));
-if (localStorage.getItem('darkMode') === '1' ||
-    (localStorage.getItem('darkMode') === null && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-  setMode(true);
-}
 </script>

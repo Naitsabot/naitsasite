@@ -1,9 +1,14 @@
-import std/[os, strutils, sequtils]
+from os import `/`, dirExists, splitFile, walkFiles
+from std/sequtils import filterIt, mapIt
+from std/strutils import find, split, startsWith, strip, toLowerAscii
 
+# Third-party imports
+import markdown
 import yaml
-import markdown # soasme/nim-markdown nimble package
 
+# Local imports
 import ./types
+
 
 proc splitFrontMatter(raw: string): (string, string) =
   if not raw.startsWith("---\n"):
@@ -18,6 +23,7 @@ proc splitFrontMatter(raw: string): (string, string) =
   let body = raw[(idx + delim.len) .. ^1]
   (yamlText, body)
 
+
 proc mapGet(n: YamlNode, k: string): tuple[ok: bool, v: YamlNode] =
   if n.kind != yMapping:
     return (false, YamlNode())
@@ -26,8 +32,10 @@ proc mapGet(n: YamlNode, k: string): tuple[ok: bool, v: YamlNode] =
   except CatchableError:
     return (false, YamlNode())
 
+
 proc nodeAsStr(n: YamlNode): string =
   if n.kind == yScalar: n.content else: ""
+
 
 proc getStr(y: YamlNode, k: string, default = ""): string =
   let r = mapGet(y, k)
@@ -36,10 +44,12 @@ proc getStr(y: YamlNode, k: string, default = ""): string =
     if s.len > 0: return s
   default
 
+
 proc getBool(y: YamlNode, k: string, default = false): bool =
   let s = getStr(y, k, "")
   if s.len == 0: return default
   s.toLowerAscii() in ["true", "yes", "1", "on"]
+
 
 proc getTags(y: YamlNode, k: string): seq[string] =
   let r = mapGet(y, k)
@@ -55,6 +65,7 @@ proc getTags(y: YamlNode, k: string): seq[string] =
   else:
     discard
 
+
 proc parseMeta(yamlText, fallbackSlug: string, fallbackTitle: string): DocumentMeta =
   var root: YamlNode
   if yamlText.len > 0:
@@ -69,6 +80,7 @@ proc parseMeta(yamlText, fallbackSlug: string, fallbackTitle: string): DocumentM
   result.draft = getBool(root, "draft", false)
   result.tags = getTags(root, "tags")
   result.gitlinks = getTags(root, "gitlinks")
+
 
 proc loadDocument*(collection: string, filePath: string): types.Document =
   let raw = readFile(filePath)
@@ -87,6 +99,7 @@ proc loadDocument*(collection: string, filePath: string): types.Document =
     rawMarkdown: bodyMd,
     sourcePath: filePath
   )
+
 
 proc loadCollection*(collection: string, dir: string): seq[types.Document] =
   if not dirExists(dir):

@@ -1,15 +1,23 @@
+# Standard library imports
+import std/[tables, strutils, options, json]
+import std/xmltree
+
+# Third-party imports
 import prologue
 import prologue/middlewares/staticfile
-import std/xmltree
-import std/[tables, strutils, options, json]
 import db_connector/db_sqlite
 
+# Local imports
 import ../config
 import ../content/indexer
 import ../content/types
 import ./templates
 import ../utils/jwt_helpers as jwtUtils
 import ../utils/db_helpers
+import ./views/blog as blogView
+import ./views/error as errorView
+import ./views/home as homeView
+import ./views/projects as projectsView
 from ../utils/seqs import head
 
 # ── helpers ───────────────────────────────────────────────────────────────────
@@ -37,66 +45,37 @@ proc jsonResp(ctx: Context, node: JsonNode, code = Http200) =
 proc home(ctx: Context, store: ContentStore, cfg: SiteConfig) {.async.} =
   let latest_blogs = listCollection(store, "blog").head(5)
   let latest_projects = listCollection(store, "projects").head(5)
-
-  var body = ""
-
-  body.add renderHTMLTemplate("src/web/templates/components/homepage.html", {"title": xmltree.escape(cfg.siteTitle)}.toTable)
-
-  body.add "<h2>Latest posts</h2><ul>"
-  for d in latest_blogs:
-    body.add docListItem("/blog", d)
-  body.add "</ul>"
-
-  body.add "<h2>Latest projects</h2><ul>"
-  for d in latest_projects:
-    body.add docListItem("/projects", d)
-  body.add "</ul>"
-
-  resp htmlLayout(cfg.siteTitle, body)
+  resp htmlLayout(cfg.siteTitle, viewHome(cfg.siteTitle, latest_blogs, latest_projects))
 
 
 proc blog(ctx: Context, store: ContentStore, cfg: SiteConfig) {.async.} =
   let posts = listCollection(store, "blog")
-  var body = "<h1>Blog</h1><ul>"
-  for d in posts:
-    body.add docListItem("/blog", d)
-  body.add "</ul>"
-  resp htmlLayout("Blog - " & cfg.siteTitle, body)
+  resp htmlLayout("Blog - " & cfg.siteTitle, viewBlogList(posts))
 
 
 proc blog_slug(ctx: Context, store: ContentStore, cfg: SiteConfig) {.async.} =
   let slug = ctx.getPathParams("slug")
   let found = findDoc(store, "blog", slug)
   if found.isSome:
-    let d = found.get
-    resp htmlLayout(d.meta.title, docPage(d))
+    resp htmlLayout(found.get.meta.title & "- Blog - " & cfg.siteTitle, viewBlogPost(found.get))
   else:
     ctx.response.code = Http404
-    resp htmlLayout("Not found", "<h1>404</h1><p>Post not found.</p>")
+    resp htmlLayout("Not found", viewNotFound("Post not found."))
 
 
 proc projects(ctx: Context, store: ContentStore, cfg: SiteConfig) {.async.} =
   let docs = listCollection(store, "projects")
-  var body = "<h1>Projects</h1>"
-  if docs.len == 0:
-    body.add "<p>No project docs yet. Add markdown files under <code>content/projects</code>.</p>"
-  else:
-    body.add "<ul>"
-    for d in docs:
-      body.add docListItem("/projects", d)
-    body.add "</ul>"
-  resp htmlLayout("Projects - " & cfg.siteTitle, body)
+  resp htmlLayout("Projects - " & cfg.siteTitle, viewProjectsList(docs))
 
 
 proc projects_slug(ctx: Context, store: ContentStore, cfg: SiteConfig) {.async.} =
   let slug = ctx.getPathParams("slug")
   let found = findDoc(store, "projects", slug)
   if found.isSome:
-    let d = found.get
-    resp htmlLayout(d.meta.title, docPage(d))
+    resp htmlLayout(found.get.meta.title & " - Projects - " & cfg.siteTitle, viewProjectsPost(found.get))
   else:
     ctx.response.code = Http404
-    resp htmlLayout("Not found", "<h1>404</h1><p>Project doc not found.</p>")
+    resp htmlLayout("Not found", viewNotFound("Project not found."))
 
 
 proc sec_vault_login(ctx: Context, cfg: SiteConfig) {.async.} =
@@ -251,6 +230,10 @@ proc apiAddReview(ctx: Context, db: DbConn) {.async.} =
 
 proc setupRoutes*(app: var Prologue, store: ContentStore, db: DbConn, cfg: SiteConfig = defaultSiteConfig) =
   app.use(staticFileMiddleware(@["public"]))
+  
+  app.get("/favicon.ico", redirectTo("public/favicon.png"))
+  app.get("/robots.txt", redirectTo("public/robots.txt"))
+  app.get("/sitemap.xml", redirectTo("public/sitemap.xml"))
 
   app.get("/", proc(ctx: Context) {.async.} = await home(ctx, store, cfg))
 

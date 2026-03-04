@@ -1,8 +1,12 @@
-import std/[tables, algorithm, options]
+# Standard library imports
+import std/tables
+from std/algorithm import sort
+from std/options import Option, none, some
 
+# Local imports
 import ../config
-import ./types
 import ./markdown_loader
+import ./types
 
 
 proc sortIfNeeded(docs: var seq[Document], sortByDateDesc: bool) =
@@ -22,7 +26,7 @@ proc loadStore*(cfg: SiteConfig = defaultSiteConfig): ContentStore =
         all.add colDocs
 
     var idx = initTable[string, int]()
-    for i, d in all:
+    for i, d in all.pairs:
         idx[key(d.collection, d.meta.slug)] = i
 
     ContentStore(docs: all, byKey: idx)
