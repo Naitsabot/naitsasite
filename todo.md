@@ -2,7 +2,7 @@
 - [ ] Add dev-mode auto-reload for markdown content (watch file mtimes or use a watcher)
 - [ ] Add tag pages: `/tags` and `/tags/:tag`
 - [ ] Add RSS feed for `/blog`
-- [ ] Add sitemap.xml and robots.txt
+- [x] Add sitemap.xml and robots.txt
 - [ ] Add OpenGraph/meta tags per document (title, summary, image)
 - [ ] Improve markdown rendering (code highlighting, GFM tables) if needed
 - [ ] Add navigation / header configuration (links in config)
