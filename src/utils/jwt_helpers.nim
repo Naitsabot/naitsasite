@@ -7,7 +7,7 @@ const jwtSecret = "9kO0ap6qo6lRe8amnZzcIp1ogKFmntirqoPjHm9atnUvmSNws1sEMC7lBHjti
 proc sign*(userId: string): string =
   var token = toJWT(%*{
     "header": {
-      "alg": "HS256",
+      "alg": "HS512",
       "typ": "JWT"
     },
     "claims": {
@@ -22,7 +22,7 @@ proc sign*(userId: string): string =
 proc verify*(tokenStr: string): bool =
   try:
     let jwtToken = tokenStr.toJWT()
-    result = jwtToken.verify(jwtSecret, HS256)
+    result = jwtToken.verify(jwtSecret, HS512)
   except:
     result = false
 

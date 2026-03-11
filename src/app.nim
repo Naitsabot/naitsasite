@@ -1,6 +1,6 @@
 # Third-party imports
 import prologue
-import db_connector/db_sqlite
+import db_connector/[db_sqlite]
 
 # Local imports
 import ./content/indexer

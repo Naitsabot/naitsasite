@@ -1,6 +1,5 @@
 # Standard library imports
-import std/[tables, strutils, options, json]
-import std/xmltree
+import std/[strutils, options, json]
 
 # Third-party imports
 import prologue
@@ -18,6 +17,7 @@ import ./views/blog as blogView
 import ./views/error as errorView
 import ./views/home as homeView
 import ./views/projects as projectsView
+import ./views/vault as vaultView
 from ../utils/seqs import head
 
 # ── helpers ───────────────────────────────────────────────────────────────────
@@ -92,15 +92,13 @@ proc sec_vault_login(ctx: Context, cfg: SiteConfig) {.async.} =
     notice = "<p class='auth-notice auth-err'>Please fill in all fields.</p>"
   elif err == "password_mismatch":
     notice = "<p class='auth-notice auth-err'>Passwords do not match.</p>"
-  var body = notice & renderHTMLTemplate("src/web/templates/components/sec-login.html")
-  resp htmlLayout(cfg.siteTitle, body)
+  resp htmlLayout(cfg.siteTitle, vaultView.viewVaultLogin(notice))
 
 proc sec_vault(ctx: Context, cfg: SiteConfig) {.async.} =
   if requireAuth(ctx).isNone:
     sendRedirect(ctx, "/vault-login")
     return
-  let body = renderHTMLTemplate("src/web/templates/components/sec-vault.html")
-  resp htmlLayout(cfg.siteTitle, body)
+  resp htmlLayout(cfg.siteTitle, vaultView.viewVault())
 
 
 proc loginHandler(ctx: Context, db: DbConn) {.async.} =
@@ -184,35 +182,7 @@ proc apiDeleteVaultEntry(ctx: Context, db: DbConn) {.async.} =
 
 proc vault_reviews(ctx: Context, db: DbConn, cfg: SiteConfig) {.async.} =
   let maybeUser = requireAuth(ctx)
-  let rows = getReviews(db)
-  var reviewsHtml = ""
-  for row in rows:
-    reviewsHtml.add "<div class='review'>"
-    reviewsHtml.add "<strong>" & xmltree.escape(row[0]) & "</strong>"
-    reviewsHtml.add "<p>" & xmltree.escape(row[1]) & "</p>"
-    reviewsHtml.add "<small>" & xmltree.escape(row[2]) & "</small>"
-    reviewsHtml.add "</div>"
-  if reviewsHtml.len == 0:
-    reviewsHtml = "<p>No reviews yet. Be the first!</p>"
-
-  let formHtml =
-    if maybeUser.isSome:
-      """<form action="/api/vault-reviews" method="post" style="margin-bottom:2em;">
-        <label for="review-text">Leave a review:</label>
-        <textarea id="review-text" name="review_text" rows="4"
-          style="width:100%;box-sizing:border-box;padding:0.5em;
-                 border:1px solid var(--color-link);border-radius:4px;
-                 background:var(--color-bg);color:var(--color-text);
-                 font-family:var(--p-font);font-size:var(--p-font-size);"
-          required placeholder="Write your review here&hellip;"></textarea>
-        <button type="submit" style="margin-top:0.5em;">Submit Review</button>
-      </form>"""
-    else:
-      "<p><a href=\"/vault-login\">Log in</a> to leave a review.</p>"
-
-  let body = renderHTMLTemplate("src/web/templates/components/sec-reviews.html",
-    {"reviews": reviewsHtml, "form": formHtml}.toTable)
-  resp htmlLayout("Reviews - " & cfg.siteTitle, body)
+  resp htmlLayout("Reviews - " & cfg.siteTitle, vaultView.viewVaultReviews(db, maybeUser))
 
 
 proc apiAddReview(ctx: Context, db: DbConn) {.async.} =
