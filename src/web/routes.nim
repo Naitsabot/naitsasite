@@ -29,7 +29,8 @@ proc blog_slug(ctx: Context, store: ContentStore, cfg: SiteConfig) {.async.} =
   let slug = ctx.getPathParams("slug")
   let found = findDoc(store, "blog", slug)
   if found.isSome:
-    resp htmlLayout(found.get.meta.title & "- Blog - " & cfg.siteTitle, viewBlogPost(found.get))
+    let page = viewBlogPost(found.get)
+    resp htmlLayout(found.get.meta.title & "- Blog - " & cfg.siteTitle, page.body, page.toc)
   else:
     ctx.response.code = Http404
     resp htmlLayout("Not found", viewNotFound("Post not found."))
@@ -44,7 +45,8 @@ proc projects_slug(ctx: Context, store: ContentStore, cfg: SiteConfig) {.async.}
   let slug = ctx.getPathParams("slug")
   let found = findDoc(store, "projects", slug)
   if found.isSome:
-    resp htmlLayout(found.get.meta.title & " - Projects - " & cfg.siteTitle, viewProjectsPost(found.get))
+    let page = viewProjectsPost(found.get)
+    resp htmlLayout(found.get.meta.title & " - Projects - " & cfg.siteTitle, page.body, page.toc)
   else:
     ctx.response.code = Http404
     resp htmlLayout("Not found", viewNotFound("Project not found."))

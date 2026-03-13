@@ -1,6 +1,7 @@
 from os import `/`, dirExists, splitFile, walkFiles
 from std/sequtils import filterIt, mapIt
-from std/strutils import find, split, startsWith, strip, toLowerAscii
+from std/strutils import find, split, splitLines, startsWith, strip, toLowerAscii
+import std/tables
 
 # Third-party imports
 import markdown
@@ -82,6 +83,91 @@ proc parseMeta(yamlText, fallbackSlug: string, fallbackTitle: string): DocumentM
   result.gitlinks = getTags(root, "gitlinks")
 
 
+proc isAsciiAlphaNum(ch: char): bool =
+  (ch >= 'a' and ch <= 'z') or (ch >= '0' and ch <= '9')
+
+
+proc slugifyHeading(text: string, used: var Table[string, int]): string =
+  var base = newStringOfCap(text.len)
+  var prevDash = false
+  for ch in text.toLowerAscii():
+    if isAsciiAlphaNum(ch):
+      base.add ch
+      prevDash = false
+    else:
+      if not prevDash and base.len > 0:
+        base.add '-'
+        prevDash = true
+
+  base = base.strip(chars = {'-'})
+  if base.len == 0:
+    base = "section"
+
+  if not used.hasKey(base):
+    used[base] = 1
+    return base
+
+  used[base] = used[base] + 1
+  base & "-" & $used[base]
+
+
+proc extractToc(bodyMd: string): seq[types.TocItem] =
+  var usedIds = initTable[string, int]()
+  var inFence = false
+  var fenceMarker = ""
+
+  for line in bodyMd.splitLines():
+    let trimmed = line.strip()
+    if trimmed.len >= 3 and (trimmed.startsWith("```") or trimmed.startsWith("~~~")):
+      let marker = trimmed[0..2]
+      if not inFence:
+        inFence = true
+        fenceMarker = marker
+      elif marker == fenceMarker:
+        inFence = false
+      continue
+
+    if inFence:
+      continue
+
+    let lead = line.strip(leading = true, trailing = false)
+    if lead.len == 0 or lead[0] != '#':
+      continue
+
+    var level = 0
+    while level < lead.len and lead[level] == '#':
+      inc level
+
+    if level == 0 or level > 6:
+      continue
+    if level >= lead.len or lead[level] != ' ':
+      continue
+
+    var text = lead[(level + 1) .. ^1].strip()
+    text = text.strip(chars = {'#', ' '})
+    if text.len == 0:
+      continue
+
+    let id = slugifyHeading(text, usedIds)
+    result.add types.TocItem(level: level, text: text, id: id)
+
+
+proc replaceFirst(s: string, sub: string, by: string): string =
+  let idx = s.find(sub)
+  if idx < 0:
+    return s
+  s[0 ..< idx] & by & s[(idx + sub.len) .. ^1]
+
+
+proc applyHeadingIds(html: string, items: seq[types.TocItem]): string =
+  var output = html
+  for item in items:
+    let tag = "<h" & $item.level & ">"
+    let tagWithId = "<h" & $item.level & " id=\"" & item.id & "\">"
+    output = replaceFirst(output, tag, tagWithId)
+  output
+
+
 proc loadDocument*(collection: string, filePath: string): types.Document =
   let raw = readFile(filePath)
   let (yamlText, bodyMd) = splitFrontMatter(raw)
@@ -90,12 +176,14 @@ proc loadDocument*(collection: string, filePath: string): types.Document =
   let titleFallback = slugFallback
 
   let meta = parseMeta(yamlText, slugFallback, titleFallback)
-  let html = markdown(bodyMd)
+  let tocItems = extractToc(bodyMd)
+  let html = applyHeadingIds(markdown(bodyMd), tocItems)
 
   types.Document(
     meta: meta,
     collection: collection,
     bodyHtml: html,
+    toc: tocItems,
     rawMarkdown: bodyMd,
     sourcePath: filePath
   )

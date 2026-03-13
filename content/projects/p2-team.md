@@ -28,13 +28,27 @@ The aim of this project is to investigate how to increase team cohesion, which i
 
 ## Images
 
-<img src="/public/thumbs/p2/imp_login2.png" alt="img" title="Login Screen" class="thumbable" data-full="/public/img/p2/imp_login2.png">
+<figure class="md-figure">
+    <img src="/public/thumbs/p2/imp_login2.png" alt="img" title="Login Screen" class="thumbable" data-full="/public/img/p2/imp_login2.png">
+    <figcaption>(click to see full undithered image)</figcaption>
+</figure>
 
-<img src="/public/thumbs/p2/imp_nav_view.png" alt="img" title="Navigation and Layout" class="thumbable" data-full="/public/img/p2/imp_nav_view.png">
+<figure class="md-figure">
+    <img src="/public/thumbs/p2/imp_nav_view.png" alt="img" title="Navigation and Layout" class="thumbable" data-full="/public/img/p2/imp_nav_view.png">
+    <figcaption>(click to see full undithered image)</figcaption>
+</figure>
 
-<img src="/public/thumbs/p2/imp_info2.png" alt="img" title="Information Page" class="thumbable" data-full="/public/img/p2/imp_info2.png">
+<figure class="md-figure">
+    <img src="/public/thumbs/p2/imp_info2.png" alt="img" title="Information Page" class="thumbable" data-full="/public/img/p2/imp_info2.png">
+    <figcaption>(click to see full undithered image)</figcaption>
+</figure>
 
-<img src="/public/thumbs/p2/imp_inter2.png" alt="img" title="Interests Page" class="thumbable" data-full="/public/img/p2/imp_inter2.png">
+<figure class="md-figure">
+    <img src="/public/thumbs/p2/imp_inter2.png" alt="img" title="Interests Page" class="thumbable" data-full="/public/img/p2/imp_inter2.png">
+    <figcaption>(click to see full undithered image)</figcaption>
+</figure>
 
-<img src="/public/thumbs/p2/imp_avi.png" alt="img" title="Avaiability Page" class="thumbable" data-full="/public/img/p2/imp_avi.png">
-
+<figure class="md-figure">
+    <img src="/public/thumbs/p2/imp_avi.png" alt="img" title="Avaiability Page" class="thumbable" data-full="/public/img/p2/imp_avi.png">
+    <figcaption>(click to see full undithered image)</figcaption>
+</figure>   

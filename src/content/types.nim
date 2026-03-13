@@ -3,6 +3,11 @@ from std/tables import Table
 
 
 type
+    TocItem* = object
+        level*: int
+        text*: string
+        id*: string
+
     DocumentMeta* = object
         title*: string
         date*: string        # keep as string for now; upgrade to DateTime later
@@ -16,6 +21,7 @@ type
         meta*: DocumentMeta
         collection*: string  # "blog" or "projects"
         bodyHtml*: string
+        toc*: seq[TocItem]
         rawMarkdown*: string
         sourcePath*: string
 

@@ -18,10 +18,11 @@ proc viewProjectsList*(docs: seq[Document]): string =
   renderHTMLTemplate("src/web/templates/pages/projects_list.html", {"items": items}.toTable)
 
 
-proc viewProjectsPost*(doc: Document): string =
-  renderHTMLTemplate("src/web/templates/pages/projects_post.html", {
+proc viewProjectsPost*(doc: Document): tuple[body: string, toc: string] =
+  result.body = renderHTMLTemplate("src/web/templates/pages/projects_post.html", {
     "title": xmltree.escape(doc.meta.title),
     "date": renderDate(doc.meta.date),
     "gitlinks": renderGitLinks(doc.meta.gitlinks),
     "body": doc.bodyHtml,
   }.toTable)
+  result.toc = renderToc(doc.toc)
