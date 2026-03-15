@@ -3,28 +3,23 @@
    ========================= */
 
 :root {
-    --link-color: #aaaaaa;
-    --p-font: monospace;
-    --p-font-size: 12pt;
-    --text-color: #000000;
-
+    --button-height: 2.4em;
+    --code-bg: #f3f3f3;
     --color-bg: hsla(165, 0%, 100%, 1);
     --color-link: rgb(10, 0, 0);
-    --color-text: #010635;
     --color-link-hover: #fff;
     --color-link-hover-bg: #000;
-
-    --code-bg: #f3f3f3;
-
-    --button-height: 2.4em;
-
-    /* Gradient color variables (light mode) */
+    --color-text: #010635;
     --grad-1: hsla(256, 82%, 77%, 0.35);
     --grad-2: hsla(197, 77%, 74%, 0.35);
     --grad-3: hsla(147, 77%, 74%, 0.35);
     --grad-4: hsla(88, 77%, 74%, 0.35);
     --grad-5: hsla(23, 77%, 74%, 0.35);
     --grad-6: hsla(234, 100%, 50%, 0.35);
+    --link-color: #aaaaaa;
+    --p-font: monospace;
+    --p-font-size: 12pt;
+    --text-color: #000000;
 }
 
 /* =========================
@@ -35,39 +30,31 @@
    Once the user has a stored preference, the JS class takes over. */
 @media (prefers-color-scheme: dark) {
     :root:not(.dark-mode):not(.light-mode) {
-        --link-color: #8ab4f8;
-        --text-color: #e6e6e6;
-
+        --code-bg: #1e1e1e;
         --color-bg: rgb(10, 0, 0);
         --color-link: #ffdbac;
-        --color-text: #e6e6e6;
         --color-link-hover: #000000;
         --color-link-hover-bg: #ffffff;
-
-        --code-bg: #1e1e1e;
-
+        --color-text: #e6e6e6;
         --grad-1: hsla(256, 60%, 40%, 0.25);
         --grad-2: hsla(197, 60%, 38%, 0.25);
         --grad-3: hsla(147, 55%, 35%, 0.25);
         --grad-4: hsla(88, 55%, 32%, 0.25);
         --grad-5: hsla(23, 60%, 38%, 0.25);
         --grad-6: hsla(234, 80%, 45%, 0.25);
+        --link-color: #8ab4f8;
+        --text-color: #e6e6e6;
     }
 }
 
 html.dark-mode,
 body.dark-mode {
-    --link-color: #8ab4f8;
-    --text-color: #e6e6e6;
-
+    --code-bg: #1e1e1e;
     --color-bg: rgb(10, 0, 0);
     --color-link: #ffdbac;
-    --color-text: #e6e6e6;
     --color-link-hover: #000000;
     --color-link-hover-bg: #ffffff;
-
-    --code-bg: #1e1e1e;
-
+    --color-text: #e6e6e6;
     /* Dark-mode gradient colors
        Lower lightness + slightly lower opacity
        to avoid glowing neon effect */
@@ -77,6 +64,8 @@ body.dark-mode {
     --grad-4: hsla(88, 55%, 32%, 0.25);
     --grad-5: hsla(23, 60%, 38%, 0.25);
     --grad-6: hsla(234, 80%, 45%, 0.25);
+    --link-color: #8ab4f8;
+    --text-color: #e6e6e6;
 }
 
 /* =========================
@@ -108,9 +97,8 @@ body.dark-mode {
 
 html,
 body {
-    min-height: 100vh;
-    margin: 0;
-
+    background-attachment: fixed;
+    background-blend-mode: overlay, normal, normal, normal, normal, normal, normal;
     background-color: var(--color-bg);
     background-image:
         url("data:image/svg+xml,%3Csvg viewBox='0 0 962 962' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"),
@@ -120,20 +108,19 @@ body {
         radial-gradient(circle at 60% 0%, var(--grad-4) 3%, transparent 40%),
         radial-gradient(circle at 80% 0%, var(--grad-5) 3%, transparent 40%),
         radial-gradient(circle at 100% 0%, var(--grad-6) 3%, transparent 40%);
-
-    background-blend-mode: overlay, normal, normal, normal, normal, normal, normal;
-    background-attachment: fixed;
-    background-size: cover;
-    background-repeat: no-repeat;
     background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0;
+    min-height: 100vh;
 }
 
 body {
+    color: var(--color-text);
     display: flex;
     flex-direction: column;
     height: 100%;
     min-height: 100vh;
-    color: var(--color-text);
 }
 
 /* =========================
@@ -151,6 +138,7 @@ body {
 }
 
 .main-content {
+    animation: fadeIn 0.6s ease-in;
     box-sizing: border-box;
     flex: 1 1 0%;
     margin-left: auto;
@@ -159,18 +147,17 @@ body {
     min-width: 0;
     padding: 1em;
     width: 100%;
-    animation: fadeIn 0.6s ease-in;
 }
 
 .sidebar-left,
 .sidebar-right {
+    animation: fadeIn 0.6s ease-in;
     background: none;
     box-sizing: border-box;
     flex: 0 0 280px;
     max-width: 280px;
     min-width: 120px;
     padding: 1em;
-    animation: fadeIn 0.6s ease-in;
 }
 
 /* =========================
@@ -178,9 +165,9 @@ body {
    ========================= */
 
 .toc {
+    padding: 0.5em 0;
     position: sticky;
     top: 1em;
-    padding: 0.5em 0;
 }
 
 .toc-title {
@@ -221,22 +208,22 @@ main {
 }
 
 header {
+    box-sizing: border-box;
     display: flex;
     justify-content: center;
-    width: 100%;
-    box-sizing: border-box;
     padding: 20px 0;
+    width: 100%;
 }
 
 .header-inner {
+    align-items: center;
+    box-sizing: border-box;
     display: flex;
     flex-direction: row;
-    align-items: center;
     justify-content: space-between;
-    width: 100%;
     max-width: 800px;
     padding: 0 1em;
-    box-sizing: border-box;
+    width: 100%;
 }
 
 footer {
@@ -257,17 +244,17 @@ footer {
 }
 
 .nav-links a {
-    text-decoration: none;
-    display: inline-block;
-    box-sizing: border-box;
-    height: var(--button-height);
-    line-height: var(--button-height);
-    padding: 0 1.2em;
+    background: transparent;
     border: 2px solid var(--color-link);
     border-radius: 0;
+    box-sizing: border-box;
     color: var(--color-link);
+    display: inline-block;
+    height: var(--button-height);
+    line-height: var(--button-height);
     opacity: 1;
-    background: transparent;
+    padding: 0 1.2em;
+    text-decoration: none;
     transition:
         background-color 0.2s ease,
         color 0.2s ease,
@@ -293,20 +280,20 @@ button,
     background: transparent;
     border: 2px solid var(--color-link);
     border-radius: 0;
-    color: var(--color-link);
     box-sizing: border-box;
+    color: var(--color-link);
+    cursor: pointer;
+    display: inline-block;
+    font-family: var(--p-font);
+    font-size: var(--p-font-size);
     height: var(--button-height);
     line-height: var(--button-height);
     padding: 0 1.2em;
-    cursor: pointer;
-    font-family: var(--p-font);
-    font-size: var(--p-font-size);
     transition:
         background-color 0.2s ease,
         color 0.2s ease,
         transform 0.05s ease,
         opacity 0.15s ease;
-    display: inline-block;
 }
 
 button:hover,
@@ -328,15 +315,15 @@ button:focus-visible,
 
 button:disabled,
 .button:disabled {
-    opacity: 0.4;
     cursor: not-allowed;
+    opacity: 0.4;
     transform: none;
 }
 
 .button-ghost {
     background: transparent;
-    color: var(--color-text);
     border: 1px solid var(--color-text);
+    color: var(--color-text);
 }
 
 .button-ghost:hover {
@@ -349,26 +336,26 @@ button:disabled,
    ========================= */
 
 h1 {
-    font-size: 1.8em;
-    margin-top: 1.2em;
-    margin-bottom: 0.6em;
-    letter-spacing: 0.02em;
     border-bottom: 2px solid var(--color-link);
+    font-size: 1.8em;
+    letter-spacing: 0.02em;
+    margin-bottom: 0.6em;
+    margin-top: 1.2em;
     padding-bottom: 0.3em;
 }
 
 h2 {
-    font-size: 1.5em;
-    margin-top: 1.1em;
-    margin-bottom: 0.55em;
     border-bottom: 1px solid var(--color-link);
+    font-size: 1.5em;
+    margin-bottom: 0.55em;
+    margin-top: 1.1em;
     padding-bottom: 0.25em;
 }
 
 h3 {
     font-size: 1.3em;
-    margin-top: 1em;
     margin-bottom: 0.5em;
+    margin-top: 1em;
 }
 
 a {
@@ -414,11 +401,10 @@ svg {
 
 .md-doc img {
     display: block;
-    margin: auto;
-    width: auto;
-    max-width: 600px;
+    margin: 1.5em auto;
     max-height: 256px;
-    margin: 1.5em auto; /* Vertical rhythm */
+    max-width: 600px;
+    width: auto;
 }
 
 .md-doc .md-figure {
@@ -431,60 +417,60 @@ svg {
 }
 
 .md-doc .md-figure figcaption {
-    margin-top: 0.5em;
     font-size: 0.95em;
+    margin-top: 0.5em;
     opacity: 0.8;
 }
 
 .md-doc h1 {
-    font-size: 1.8em;
-    margin-top: 1.2em;
-    margin-bottom: 0.6em;
-    letter-spacing: 0.02em;
     border-bottom: 2px solid var(--color-link);
+    font-size: 1.8em;
+    letter-spacing: 0.02em;
+    margin-bottom: 0.6em;
+    margin-top: 1.2em;
     padding-bottom: 0.3em;
 }
 
 .md-doc h2 {
-    font-size: 1.5em;
-    margin-top: 1.1em;
-    margin-bottom: 0.55em;
     border-bottom: 1px solid var(--color-link);
+    font-size: 1.5em;
+    margin-bottom: 0.55em;
+    margin-top: 1.1em;
     padding-bottom: 0.25em;
 }
 
 .md-doc h3 {
     font-size: 1.3em;
-    margin-top: 1em;
     margin-bottom: 0.5em;
+    margin-top: 1em;
 }
 
 .md-doc h4 {
     font-size: 1.15em;
-    margin-top: 0.9em;
     margin-bottom: 0.45em;
+    margin-top: 0.9em;
 }
 
 .md-doc h5 {
     font-size: 1.05em;
-    margin-top: 0.8em;
     margin-bottom: 0.4em;
+    margin-top: 0.8em;
 }
 
 .md-doc h6 {
     font-size: 1em;
-    margin-top: 0.7em;
     margin-bottom: 0.35em;
+    margin-top: 0.7em;
     opacity: 0.8;
 }
 
 /* Block quotes */
 .md-doc blockquote {
-    margin: 1em 0;
-    padding: 0.75em 1em;
-    border-left: 3px solid var(--color-link);
     background: var(--code-bg);
+    border-left: 3px solid var(--color-link);
+    margin: 1em 0;
     opacity: 0.9;
+    padding: 0.75em 1em;
 }
 
 /* Lists */
@@ -524,8 +510,8 @@ svg {
 /* Fenced Blocks */
 .md-doc pre {
     background: var(--code-bg);
-    padding: 1em;
     overflow-x: auto;
+    padding: 1em;
 }
 
 .md-doc pre code {
@@ -535,9 +521,9 @@ svg {
 
 /* Tables */
 .md-doc table {
-    width: 100%;
     border-collapse: collapse;
     margin: 1em 0;
+    width: 100%;
 }
 
 .md-doc th,
