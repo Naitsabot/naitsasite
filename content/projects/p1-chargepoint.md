@@ -14,10 +14,11 @@ This is the first (well, second, but that’s beside the point) semester project
 
 This project focuses on the placement of chargers for electric vehicles. This is to be achieved by developing a programme that can map out the ideal placements of the chargers.
 
-## Technologies
+## Technologies and Theory
 
 - C
 - CMake (😫)
+- Grapth traversal
 
 ## Abstract (From Project Report)
 

@@ -16,7 +16,7 @@ This project attempts to correlate team members' free time and their interests i
 
 For this, a basic SPA was written with Node.js and Express.js (and just that) for team members to log on to and provide appropriate information, and to show results of calculations.
 
-## Technologies
+## Technologies and Theory
 
 - Node.js, Express.js
 - Vanilla HTML, CSS
@@ -29,26 +29,46 @@ The aim of this project is to investigate how to increase team cohesion, which i
 ## Images
 
 <figure class="md-figure">
-    <img src="/public/thumbs/p2/imp_login2.png" alt="img" title="Login Screen" class="thumbable" data-full="/public/img/p2/imp_login2.png">
-    <figcaption>(click to see full undithered image)</figcaption>
+    <img src="/public/thumbs/p2/imp_login2.png" alt="Login and profile creation page" title="Login Screen" class="thumbable" data-full="/public/img/p2/imp_login2.png">
+    <figcaption>
+        Login and profile creation page
+        <br>
+        (click to see full undithered image)
+    </figcaption>
 </figure>
 
 <figure class="md-figure">
-    <img src="/public/thumbs/p2/imp_nav_view.png" alt="img" title="Navigation and Layout" class="thumbable" data-full="/public/img/p2/imp_nav_view.png">
-    <figcaption>(click to see full undithered image)</figcaption>
+    <img src="/public/thumbs/p2/imp_nav_view.png" alt="About page for the tool" title="Navigation and Layout" class="thumbable" data-full="/public/img/p2/imp_nav_view.png">
+    <figcaption>
+        About page for the tool
+        <br>
+        (click to see full undithered image)
+    </figcaption>
 </figure>
 
 <figure class="md-figure">
-    <img src="/public/thumbs/p2/imp_info2.png" alt="img" title="Information Page" class="thumbable" data-full="/public/img/p2/imp_info2.png">
-    <figcaption>(click to see full undithered image)</figcaption>
+    <img src="/public/thumbs/p2/imp_info2.png" alt="Profile and team into page" title="Information Page" class="thumbable" data-full="/public/img/p2/imp_info2.png">
+    <figcaption>
+        Profile and team into page
+        <br>
+        (click to see full undithered image)
+    </figcaption>
 </figure>
 
 <figure class="md-figure">
-    <img src="/public/thumbs/p2/imp_inter2.png" alt="img" title="Interests Page" class="thumbable" data-full="/public/img/p2/imp_inter2.png">
-    <figcaption>(click to see full undithered image)</figcaption>
+    <img src="/public/thumbs/p2/imp_inter2.png" alt="Interests selection pages" title="Interests Page" class="thumbable" data-full="/public/img/p2/imp_inter2.png">
+    <figcaption>
+        Interests selection pages
+        <br>
+        (click to see full undithered image)
+    </figcaption>
 </figure>
 
 <figure class="md-figure">
-    <img src="/public/thumbs/p2/imp_avi.png" alt="img" title="Avaiability Page" class="thumbable" data-full="/public/img/p2/imp_avi.png">
-    <figcaption>(click to see full undithered image)</figcaption>
-</figure>   
+    <img src="/public/thumbs/p2/imp_avi.png" alt="Time availability selection page" title="Avaiability Page" class="thumbable" data-full="/public/img/p2/imp_avi.png">
+    <figcaption>
+        Time availability selection page
+        <br>
+        (click to see full undithered image)
+    </figcaption>
+</figure>
