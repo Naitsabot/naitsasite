@@ -226,6 +226,12 @@ header {
     width: 100%;
 }
 
+.header-actions {
+    align-items: center;
+    display: flex;
+    gap: 0.25em;
+}
+
 footer {
     margin-left: auto;
     margin-right: auto;
@@ -268,6 +274,29 @@ footer {
 
 .nav-links a:active {
     transform: scale(0.96);
+}
+
+.github-link {
+    align-items: center;
+    border: 2px solid var(--color-link);
+    box-sizing: border-box;
+    color: var(--color-link);
+    display: inline-flex;
+    height: var(--button-height);
+    justify-content: center;
+    width: var(--button-height);
+}
+
+.github-link:hover {
+    background-color: var(--color-link);
+    color: var(--color-bg);
+}
+
+.github-link svg {
+    display: block;
+    fill: currentColor;
+    height: 1.5em;
+    width: 1.5em;
 }
 
 /* =========================
@@ -384,8 +413,10 @@ code {
    ========================= */
 
 .about_pic {
+    border: 2px solid var(--color-link);
     border-radius: 8px;
     filter: url(#profile_filter);
+    padding: 2px;
     width: 200px;
 }
 
@@ -400,10 +431,13 @@ svg {
    =========================*/
 
 .md-doc img {
+    border: 2px solid var(--color-link);
+    box-sizing: border-box;
     display: block;
     margin: 1.5em auto;
     max-height: 256px;
     max-width: 600px;
+    padding: 0.35em;
     width: auto;
 }
 
