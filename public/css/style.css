@@ -281,6 +281,7 @@ footer {
     border: 2px solid var(--color-link);
     box-sizing: border-box;
     color: var(--color-link);
+    opacity: 1;
     display: inline-flex;
     height: var(--button-height);
     justify-content: center;
