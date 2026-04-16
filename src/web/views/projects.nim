@@ -10,10 +10,10 @@ import ../templates
 import ./shared
 
 
-proc viewProjectsList*(docs: seq[Document]): string =
+proc viewProjectsList*(docs: seq[Document], base: string = ""): string =
   let items = docs.mapIt(
     renderHTMLTemplate("src/web/templates/components/doc_list_item.html",
-      {"url": "/projects/" & it.meta.slug, "title": xmltree.escape(it.meta.title)}.toTable)
+      {"url": base & "/projects/" & it.meta.slug, "title": xmltree.escape(it.meta.title)}.toTable)
   ).join("")
   renderHTMLTemplate("src/web/templates/pages/projects_list.html", {"items": items}.toTable)
 

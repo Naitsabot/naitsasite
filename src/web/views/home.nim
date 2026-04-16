@@ -9,17 +9,18 @@ import ../../content/types
 import ../templates
 
 
-proc viewHome*(title: string, blogs: seq[Document], projects: seq[Document]): string =
+proc viewHome*(title: string, blogs: seq[Document], projects: seq[Document], base: string = ""): string =
   let blogItems = blogs.mapIt(
     renderHTMLTemplate("src/web/templates/components/doc_list_item.html",
-      {"url": "/blog/" & it.meta.slug, "title": xmltree.escape(it.meta.title)}.toTable)
+      {"url": base & "/blog/" & it.meta.slug, "title": xmltree.escape(it.meta.title)}.toTable)
   ).join("")
   let projectItems = projects.mapIt(
     renderHTMLTemplate("src/web/templates/components/doc_list_item.html",
-      {"url": "/projects/" & it.meta.slug, "title": xmltree.escape(it.meta.title)}.toTable)
+      {"url": base & "/projects/" & it.meta.slug, "title": xmltree.escape(it.meta.title)}.toTable)
   ).join("")
   renderHTMLTemplate("src/web/templates/pages/home.html", {
     "title": xmltree.escape(title),
+    "base": base,
     "blogs": blogItems,
     "projects": projectItems,
   }.toTable)

@@ -10,3 +10,12 @@ requires "markdown >= 0.8.8" # https://github.com/soasme/nim-markdown
 
 srcDir = "src"
 bin    = @["app"]
+
+task static, "Build static site into dist/":
+    exec "nim c -r src/static.nim"
+
+task staticgithub, "Build static site for GitHub Pages (project path)":
+    exec "nim c -r src/static.nim -- --base=/naitsasite"
+
+task staticrelative, "Build static site with relative paths (file://)":
+    exec "nim c -r src/static.nim -- --relative"
