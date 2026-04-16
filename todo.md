@@ -1,4 +1,4 @@
-- [-] Switch from string-built HTML to a real template engine (Nimja, Mustache, etc.)
+- [-] Switch from string-built HTML to a real template engine (Nimja, etc.)
 - [ ] Add dev-mode auto-reload for markdown content (watch file mtimes or use a watcher)
 - [ ] Add tag pages: `/tags` and `/tags/:tag`
 - [ ] Add RSS feed for `/blog`
@@ -22,3 +22,4 @@
         - [x] image size
             - [x] display thumbnails (on img with class="thumbable")
             - [x] Add functionallity, that when thumb is clicked, the image is shown in large size in an overlay
+- [ ] Compile to static HTML for Github Pages
