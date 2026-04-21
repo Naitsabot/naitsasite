@@ -10,9 +10,17 @@
     <script>
 (function() {
     var stored = localStorage.getItem('darkMode');
-    var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    if (stored === '1' || (stored === null && prefersDark)) {
-        document.documentElement.classList.add('dark-mode');
+    var root = document.documentElement;
+    if (stored === '1') {
+        root.classList.add('dark-mode');
+        root.classList.remove('light-mode');
+    } else if (stored === '0') {
+        root.classList.add('light-mode');
+        root.classList.remove('dark-mode');
+    } else {
+        // No saved choice: let CSS follow the system preference.
+        root.classList.remove('dark-mode');
+        root.classList.remove('light-mode');
     }
 })();
     </script>
