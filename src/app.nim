@@ -1,7 +1,7 @@
 # Local imports
 import ./content/indexer
-import ./utils/thumbs
 import ./content/types
+import ./utils/thumbs
 
 when defined(static):
     # Local imports
