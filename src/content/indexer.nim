@@ -21,11 +21,11 @@ proc loadStore*(cfg: SiteConfig = defaultSiteConfig): ContentStore =
     var all: seq[Document] = @[]
 
     for c in cfg.collections:
-        var colDocs = loadCollection(c.name, c.dir)
+        var colDocs: seq[Document] = loadCollection(c.name, c.dir)
         sortIfNeeded(colDocs, c.sortByDateDesc)
         all.add colDocs
 
-    var idx = initTable[string, int]()
+    var idx: Table[system.string, system.int] = initTable[string, int]()
     for i, d in all.pairs:
         idx[key(d.collection, d.meta.slug)] = i
 
@@ -33,7 +33,7 @@ proc loadStore*(cfg: SiteConfig = defaultSiteConfig): ContentStore =
 
 
 proc findDoc*(store: ContentStore, collection, slug: string): Option[Document] =
-    let k = key(collection, slug)
+    let k: string = key(collection, slug)
     if store.byKey.hasKey(k):
         return some(store.docs[store.byKey[k]])
     none(Document)

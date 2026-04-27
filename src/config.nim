@@ -12,7 +12,7 @@ type
         collections*: seq[CollectionConfig]
 
 
-const defaultSiteConfig* = SiteConfig(
+const defaultSiteConfig*: SiteConfig = SiteConfig(
     siteTitle: "NaitsaSite",
     baseUrl: "",
     collections: @[

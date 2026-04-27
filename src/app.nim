@@ -1,11 +1,17 @@
-# Third-party imports
-import prologue
-
 # Local imports
 import ./content/indexer
 import ./utils/thumbs
-import ./web/routes
 import ./content/types
+
+when defined(static):
+    # Local imports
+    import ./web/build
+else:
+    # Third-party imports
+    import prologue
+
+    # Local imports
+    import ./web/routes
 
 
 proc main() =
@@ -15,9 +21,12 @@ proc main() =
     # Load all markdown content at startup
     let store: ContentStore = loadStore()
 
-    var app: Prologue = newApp(settings = newSettings(appName = "naitsasite"))
-    setupRoutes(app, store)
-    app.run()
+    when defined(static):
+        build(store)
+    else:
+        var app: Prologue = newApp(settings = newSettings(appName = "naitsasite"))
+        setupRoutes(app, store)
+        app.run()
 
 
 when isMainModule:

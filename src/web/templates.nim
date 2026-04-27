@@ -5,7 +5,7 @@ from std/xmltree import escape
 
 
 proc renderHTMLTemplate*(templatePath: string, vars: Table[string, string] = initTable[string, string]()): string =
-  var temp = readFile(templatePath)
+  var temp: string = readFile(templatePath)
   for key, value in vars:
     temp = temp.replace("{{" & key & "}}", value)
   result = temp

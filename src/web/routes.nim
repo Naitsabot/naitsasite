@@ -15,21 +15,21 @@ from ../utils/seqs import head
 
 
 proc home(ctx: Context, store: ContentStore, cfg: SiteConfig) {.async.} =
-  let latest_blogs = listCollection(store, "blog").head(5)
-  let latest_projects = listCollection(store, "projects").head(5)
+  let latest_blogs: seq[Document] = listCollection(store, "blog").head(5)
+  let latest_projects: seq[Document] = listCollection(store, "projects").head(5)
   resp htmlLayout(cfg.siteTitle, viewHome(cfg.siteTitle, latest_blogs, latest_projects))
 
 
 proc blog(ctx: Context, store: ContentStore, cfg: SiteConfig) {.async.} =
-  let posts = listCollection(store, "blog")
+  let posts: seq[Document] = listCollection(store, "blog")
   resp htmlLayout("Blog - " & cfg.siteTitle, viewBlogList(posts))
 
 
 proc blog_slug(ctx: Context, store: ContentStore, cfg: SiteConfig) {.async.} =
-  let slug = ctx.getPathParams("slug")
-  let found = findDoc(store, "blog", slug)
+  let slug: string = ctx.getPathParams("slug")
+  let found: Option[types.Document] = findDoc(store, "blog", slug)
   if found.isSome:
-    let page = viewBlogPost(found.get)
+    let page: tuple[body: string, toc: string] = viewBlogPost(found.get)
     resp htmlLayout(found.get.meta.title & "- Blog - " & cfg.siteTitle, page.body, page.toc)
   else:
     ctx.response.code = Http404
@@ -37,15 +37,15 @@ proc blog_slug(ctx: Context, store: ContentStore, cfg: SiteConfig) {.async.} =
 
 
 proc projects(ctx: Context, store: ContentStore, cfg: SiteConfig) {.async.} =
-  let docs = listCollection(store, "projects")
+  let docs: seq[Document] = listCollection(store, "projects")
   resp htmlLayout("Projects - " & cfg.siteTitle, viewProjectsList(docs))
 
 
 proc projects_slug(ctx: Context, store: ContentStore, cfg: SiteConfig) {.async.} =
-  let slug = ctx.getPathParams("slug")
-  let found = findDoc(store, "projects", slug)
+  let slug: string = ctx.getPathParams("slug")
+  let found: Option[types.Document] = findDoc(store, "projects", slug)
   if found.isSome:
-    let page = viewProjectsPost(found.get)
+    let page: tuple[body: string, toc: string] = viewProjectsPost(found.get)
     resp htmlLayout(found.get.meta.title & " - Projects - " & cfg.siteTitle, page.body, page.toc)
   else:
     ctx.response.code = Http404

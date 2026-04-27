@@ -12,16 +12,16 @@ proc generateThumbnail*(srcPath, destPath: string, width = 256, height = 256) =
 
 
 proc ensureThumbnails*(imgDir: string, width = 256, height = 256) =
-  let thumbDir = imgDir / "thumbs"
+  let thumbDir: string = imgDir / "thumbs"
   if not dirExists(thumbDir):
     createDir(thumbDir)
   for path in walkDirRec(imgDir):
     if path.startsWith(thumbDir & "/"):
       continue
     if path.endsWith(".png") or path.endsWith(".jpg") or path.endsWith(".jpeg"):
-      let relPath = relativePath(path, imgDir)
-      let thumbPath = thumbDir / relPath
-      let thumbParent = thumbPath.parentDir()
+      let relPath: string = relativePath(path, imgDir)
+      let thumbPath: string = thumbDir / relPath
+      let thumbParent: string = thumbPath.parentDir()
       if not dirExists(thumbParent):
         createDir(thumbParent)
       if not fileExists(thumbPath):
