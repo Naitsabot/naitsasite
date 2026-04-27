@@ -5,16 +5,17 @@ import prologue
 import ./content/indexer
 import ./utils/thumbs
 import ./web/routes
+import ./content/types
 
 
 proc main() =
     # Ensure thumbnails for all images
-    ensureThumbnails("public/img", "public/thumbs")
+    ensureThumbnails("public/img")
 
     # Load all markdown content at startup
-    let store = loadStore()
+    let store: ContentStore = loadStore()
 
-    var app = newApp(settings = newSettings(appName = "naitsasite"))
+    var app: Prologue = newApp(settings = newSettings(appName = "naitsasite"))
     setupRoutes(app, store)
     app.run()
 

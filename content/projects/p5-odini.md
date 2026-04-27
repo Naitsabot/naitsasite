@@ -10,7 +10,7 @@ gitlinks: []
 
 # Enriching Dataset metadata (Fall 2025)
 
-Wholeheartedly the most boring project I have been part of in terms of stuff made.  
+Not to exciting.  
 The fifth semester of the software bachelor is about working with Agile practices — so... SCRUM — in a multi-project environment, here [ODINI](https://odini.net/), with other groups across the semester, different departments, and with the people of the organisation as well.  
 Our focus was on incorporating metadata into the backend of ODINI, together with optimising some database work. This involved a FastAPI backend, GCP (BigQuery and storage buckets).
 

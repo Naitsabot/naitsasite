@@ -17,7 +17,7 @@ A terminal user interface for the F-Klubben stregsystem, written in GnuCOBOL wit
 It seems as if every project I set out to do, documented or undocumented, I try to use some kind of framework, methods, and of course language that I have not tried before.
 
 <figure class="md-figure">
-    <img src="/public/thumbs/cobol/comic.png" alt="Dilbert by Schott Adams comic from 1997-11-04" title="(click to see full undithered image)" class="thumbable" data-full="/public/img/cobol/comic.png">
+    <img src="/public/img/thumbs/cobol/comic.png" alt="Dilbert by Schott Adams comic from 1997-11-04" title="(click to see full undithered image)" class="thumbable" data-full="/public/img/cobol/comic.png" loading="lazy">
     <figcaption>
     <a href="https://web.archive.org/web/20230301151600/https://dilbert.com/strip/1997-11-04">Dilbert by Schott Adams comic from 1997-11-04</a>
     <br>
@@ -35,7 +35,7 @@ One mantra, not to sound like a cult, spread around the sofas and fridges of F-K
 The most important system in F-Klubben is the [stregsystemet](https://github.com/f-klubben/stregsystemet), although as the F-ormand (committee leader) of F-oret, I would say it is the system for songbook creation: [sangbog](https://github.com/f-klubben/sangbog) and the newer [Typst sangbog](https://github.com/f-klubben/ftsongbook).  
 
 <figure class="md-figure">
-    <img src="/public/thumbs/cobol/stregsystemfff.png" alt="Screenshot of stregsystem frontend" title="(click to see full undithered image)" class="thumbable" data-full="/public/img/cobol/stregsystemfff.png">
+    <img src="/public/img/thumbs/cobol/stregsystemfff.png" alt="Screenshot of stregsystem frontend" title="(click to see full undithered image)" class="thumbable" data-full="/public/img/cobol/stregsystemfff.png" loading="lazy">
     <figcaption>
     Screenshot of stregsystem frontend, from an <a href="https://github.com/f-klubben/stregsystemet/pull/586">old closed PR of mine</a>
     <br>

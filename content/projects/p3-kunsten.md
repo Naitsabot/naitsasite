@@ -35,7 +35,7 @@ This project is done in collaboration with Kunsten Museum of Modern Art Aalborg.
 ### Component overview of frontend
 
 <figure class="md-figure">
-    <img src="/public/thumbs/p3/component-overview.png" alt="Component overview of frontend" title="(click to see full undithered image)" class="thumbable" data-full="/public/img/p3/component-overview.png">
+    <img src="/public/img/thumbs/p3/component-overview.png" alt="Component overview of frontend" title="(click to see full undithered image)" class="thumbable" data-full="/public/img/p3/component-overview.png" loading="lazy">
     <figcaption>
         Component overview of frontend
         <br>
@@ -46,7 +46,7 @@ This project is done in collaboration with Kunsten Museum of Modern Art Aalborg.
 ### Scheduling and live dashboard
 
 <figure class="md-figure">
-    <img src="/public/thumbs/p3/dashboard-admin.png" alt="Dashboard wiht live view of media screens content" title="(click to see full undithered image)" class="thumbable" data-full="/public/img/p3/dashboard-admin.png">
+    <img src="/public/img/thumbs/p3/dashboard-admin.png" alt="Dashboard wiht live view of media screens content" title="(click to see full undithered image)" class="thumbable" data-full="/public/img/p3/dashboard-admin.png" loading="lazy">
     <figcaption>
         Dashboard wiht live view of media screens content
         <br>
@@ -55,7 +55,7 @@ This project is done in collaboration with Kunsten Museum of Modern Art Aalborg.
 </figure>
 
 <figure class="md-figure">
-    <img src="/public/thumbs/p3/week-schedule.png" alt="Week schedule page" title="(click to see full undithered image)" class="thumbable" data-full="/public/img/p3/week-schedule.png">
+    <img src="/public/img/thumbs/p3/week-schedule.png" alt="Week schedule page" title="(click to see full undithered image)" class="thumbable" data-full="/public/img/p3/week-schedule.png" loading="lazy">
     <figcaption>
         Week schedule page
         <br>
@@ -64,7 +64,7 @@ This project is done in collaboration with Kunsten Museum of Modern Art Aalborg.
 </figure>
 
 <figure class="md-figure">
-    <img src="/public/thumbs/p3/new-time-slot-model.png" alt="New time slot model for scheduling" title="(click to see full undithered image)" class="thumbable" data-full="/public/img/p3/new-time-slot-model.png">
+    <img src="/public/img/thumbs/p3/new-time-slot-model.png" alt="New time slot model for scheduling" title="(click to see full undithered image)" class="thumbable" data-full="/public/img/p3/new-time-slot-model.png" loading="lazy">
     <figcaption>
         New time slot model for scheduling
         <br>
@@ -75,7 +75,7 @@ This project is done in collaboration with Kunsten Museum of Modern Art Aalborg.
 ### Media management
 
 <figure class="md-figure">
-    <img src="/public/thumbs/p3/slideshow-edit-page.png" alt="Slideshow edit and creation page" title="(click to see full undithered image)" class="thumbable" data-full="/public/img/p3/slideshow-edit-page.png">
+    <img src="/public/img/thumbs/p3/slideshow-edit-page.png" alt="Slideshow edit and creation page" title="(click to see full undithered image)" class="thumbable" data-full="/public/img/p3/slideshow-edit-page.png" loading="lazy">
     <figcaption>
         Slideshow edit and creation page
         <br>
@@ -84,7 +84,7 @@ This project is done in collaboration with Kunsten Museum of Modern Art Aalborg.
 </figure>
 
 <figure class="md-figure">
-    <img src="/public/thumbs/p3/gallery.png" alt="Media gallery page" title="(click to see full undithered image)" class="thumbable" data-full="/public/img/p3/gallery.png">
+    <img src="/public/img/thumbs/p3/gallery.png" alt="Media gallery page" title="(click to see full undithered image)" class="thumbable" data-full="/public/img/p3/gallery.png" loading="lazy">
     <figcaption>
         Media gallery page
         <br>
@@ -93,7 +93,7 @@ This project is done in collaboration with Kunsten Museum of Modern Art Aalborg.
 </figure>
 
 <figure class="md-figure">
-    <img src="/public/thumbs/p3/gallery-item.png" alt="Gallery item modal" title="(click to see full undithered image)" class="thumbable" data-full="/public/img/p3/gallery-item.png">
+    <img src="/public/img/thumbs/p3/gallery-item.png" alt="Gallery item modal" title="(click to see full undithered image)" class="thumbable" data-full="/public/img/p3/gallery-item.png" loading="lazy">
     <figcaption>
         Gallery item modal
         <br>
@@ -102,7 +102,7 @@ This project is done in collaboration with Kunsten Museum of Modern Art Aalborg.
 </figure>
 
 <figure class="md-figure">
-    <img src="/public/thumbs/p3/new-gallery-item.png" alt="New gallery item modal" title="(click to see full undithered image)" class="thumbable" data-full="/public/img/p3/new-gallery-item.png">
+    <img src="/public/img/thumbs/p3/new-gallery-item.png" alt="New gallery item modal" title="(click to see full undithered image)" class="thumbable" data-full="/public/img/p3/new-gallery-item.png" loading="lazy">
     <figcaption>
         New gallery item modal
         <br>
@@ -113,7 +113,7 @@ This project is done in collaboration with Kunsten Museum of Modern Art Aalborg.
 ### User login and management
 
 <figure class="md-figure">
-    <img src="/public/thumbs/p3/login.png" alt="Login page" title="(click to see full undithered image)" class="thumbable" data-full="/public/img/p3/login.png">
+    <img src="/public/img/thumbs/p3/login.png" alt="Login page" title="(click to see full undithered image)" class="thumbable" data-full="/public/img/p3/login.png" loading="lazy">
     <figcaption>
         Login page
         <br>
@@ -122,7 +122,7 @@ This project is done in collaboration with Kunsten Museum of Modern Art Aalborg.
 </figure>
 
 <figure class="md-figure">
-    <img src="/public/thumbs/p3/forgot-pswd.png" alt="Forgot password page" title="(click to see full undithered image)" class="thumbable" data-full="/public/img/p3/forgot-pswd.png">
+    <img src="/public/img/thumbs/p3/forgot-pswd.png" alt="Forgot password page" title="(click to see full undithered image)" class="thumbable" data-full="/public/img/p3/forgot-pswd.png" loading="lazy">
     <figcaption>
         Forgot password page
         <br>
@@ -131,7 +131,7 @@ This project is done in collaboration with Kunsten Museum of Modern Art Aalborg.
 </figure>
 
 <figure class="md-figure">
-    <img src="/public/thumbs/p3/pswd-reset.png" alt="Password reset page" title="(click to see full undithered image)" class="thumbable" data-full="/public/img/p3/pswd-reset.png">
+    <img src="/public/img/thumbs/p3/pswd-reset.png" alt="Password reset page" title="(click to see full undithered image)" class="thumbable" data-full="/public/img/p3/pswd-reset.png" loading="lazy">
     <figcaption>
         Password reset page
         <br>
@@ -140,7 +140,7 @@ This project is done in collaboration with Kunsten Museum of Modern Art Aalborg.
 </figure>
 
 <figure class="md-figure">
-    <img src="/public/thumbs/p3/user.png" alt="User settings page" title="(click to see full undithered image)" class="thumbable" data-full="/public/img/p3/user.png">
+    <img src="/public/img/thumbs/p3/user.png" alt="User settings page" title="(click to see full undithered image)" class="thumbable" data-full="/public/img/p3/user.png" loading="lazy">
     <figcaption>
         User settings page
         <br>
@@ -149,7 +149,7 @@ This project is done in collaboration with Kunsten Museum of Modern Art Aalborg.
 </figure>
 
 <figure class="md-figure">
-    <img src="/public/thumbs/p3/admin-board.png" alt="Admin board over users" title="(click to see full undithered image)" class="thumbable" data-full="/public/img/p3/admin-board.png">
+    <img src="/public/img/thumbs/p3/admin-board.png" alt="Admin board over users" title="(click to see full undithered image)" class="thumbable" data-full="/public/img/p3/admin-board.png" loading="lazy">
     <figcaption>
         Admin board over users
         <br>
