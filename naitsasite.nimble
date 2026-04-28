@@ -10,3 +10,6 @@ requires "markdown >= 0.8.8" # https://github.com/soasme/nim-markdown
 
 srcDir = "src"
 bin    = @["app"]
+
+task static, "build static target":
+    exec "nim c -d:static -r src/app.nim"

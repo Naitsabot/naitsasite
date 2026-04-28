@@ -277,7 +277,7 @@ footer {
     transform: scale(0.96);
 }
 
-.github-link {
+.some-link {
     align-items: center;
     border: 2px solid var(--color-link);
     box-sizing: border-box;
@@ -289,12 +289,12 @@ footer {
     width: var(--button-height);
 }
 
-.github-link:hover {
+.some-link:hover {
     background-color: var(--color-link);
     color: var(--color-bg);
 }
 
-.github-link svg {
+.some-link svg {
     display: block;
     fill: currentColor;
     height: 1.5em;

@@ -32,8 +32,6 @@ The aim of this project is to investigate how to increase team cohesion, which i
     <img src="/public/img/thumbs/p2/imp_login2.png" alt="Login and profile creation page" title="(click to see full undithered image)" class="thumbable" data-full="/public/img/p2/imp_login2.png" loading="lazy">
     <figcaption>
         Login and profile creation page
-        <br>
-        (click to see full undithered image)
     </figcaption>
 </figure>
 
@@ -41,8 +39,6 @@ The aim of this project is to investigate how to increase team cohesion, which i
     <img src="/public/img/thumbs/p2/imp_nav_view.png" alt="About page for the tool" title="(click to see full undithered image)" class="thumbable" data-full="/public/img/p2/imp_nav_view.png" loading="lazy">
     <figcaption>
         About page for the tool
-        <br>
-        (click to see full undithered image)
     </figcaption>
 </figure>
 
@@ -50,8 +46,6 @@ The aim of this project is to investigate how to increase team cohesion, which i
     <img src="/public/img/thumbs/p2/imp_info2.png" alt="Profile and team into page" ttitle="(click to see full undithered image)" class="thumbable" data-full="/public/img/p2/imp_info2.png" loading="lazy">
     <figcaption>
         Profile and team into page
-        <br>
-        (click to see full undithered image)
     </figcaption>
 </figure>
 
@@ -59,8 +53,6 @@ The aim of this project is to investigate how to increase team cohesion, which i
     <img src="/public/img/thumbs/p2/imp_inter2.png" alt="Interests selection pages" title="(click to see full undithered image)" class="thumbable" data-full="/public/img/p2/imp_inter2.png" loading="lazy">
     <figcaption>
         Interests selection pages
-        <br>
-        (click to see full undithered image)
     </figcaption>
 </figure>
 
@@ -68,7 +60,5 @@ The aim of this project is to investigate how to increase team cohesion, which i
     <img src="/public/img/thumbs/p2/imp_avi.png" alt="Time availability selection page" title="(click to see full undithered image)" class="thumbable" data-full="/public/img/p2/imp_avi.png" loading="lazy">
     <figcaption>
         Time availability selection page
-        <br>
-        (click to see full undithered image)
     </figcaption>
 </figure>

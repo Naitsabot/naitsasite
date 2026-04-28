@@ -3,7 +3,7 @@ title: Stregsystem TUI Written in gnuCOBOL
 date: 2026-03-15
 slug: cobol-tui
 tags: [gnucobol]
-draft: true
+draft: true\
 summary: something with COBOL.
 gitlinks: [https://github.com/Naitsabot/stregsystem-cob-tui]
 ---
