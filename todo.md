@@ -1,4 +1,4 @@
-- [-] Switch from string-built HTML to a real template engine (Nimja, etc.)
+- [ ] Switch from string-built HTML to a real template engine (Nimja, etc.)
 - [ ] Add dev-mode auto-reload for markdown content (watch file mtimes or use a watcher)
 - [ ] Add tag pages: `/tags` and `/tags/:tag`
 - [ ] Add RSS feed for `/blog`
