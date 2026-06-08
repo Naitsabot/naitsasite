@@ -1,5 +1,5 @@
 ---
-title: P2 AAU project - Team Coheasion Tool
+title: P2 AAU Project - Team Coheasion Tool
 date: 2026-02-21
 slug: p2-team
 tags: [university, js, node]

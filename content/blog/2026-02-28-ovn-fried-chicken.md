@@ -7,7 +7,7 @@ draft: false
 summary: Very quick and simple ovn-fried chicken recipie
 ---
 
-# I Loooove Fried Chicken
+# I Loooove Fried Chicken 🍗
 
 This recipe is very customisable, as it is extremely easy to make.  
 Any of the spices can be changed to taste.

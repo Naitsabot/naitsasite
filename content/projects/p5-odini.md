@@ -1,5 +1,5 @@
 ---
-title: P5 AAU project - Enriching Dataset Metadata in ODINI
+title: P5 AAU Project - Enriching Dataset Metadata in ODINI
 date: 2026-02-24
 slug: p5-odini
 tags: [university, pyhton, fastapi, bigquery]
@@ -8,7 +8,7 @@ summary: Fifth Semester.
 gitlinks: []
 ---
 
-# Enriching Dataset metadata (Fall 2025)
+# Enriching Dataset Metadata (Fall 2025)
 
 Not so terribly exciting.  
 The fifth semester of the software bachelor is about working with Agile practices — so... SCRUM — in a multi-project environment, here [ODINI](https://odini.net/), with other groups across the semester, different departments, and with the people of the organisation as well.  

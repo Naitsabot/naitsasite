@@ -1,5 +1,5 @@
 ---
-title: P3 AAU project - CMS System for Kunsten Museum of Art Aalborg
+title: P3 AAU Project - CMS System for Kunsten Museum of Art Aalborg
 date: 2026-02-22
 slug: p3-kunsten
 tags: [university, java, spring boot, svelte]
