@@ -152,8 +152,50 @@ proc extractToc(bodyMd: string): seq[types.TocItem] =
     result.add types.TocItem(level: level, text: text, id: id)
 
 
+proc normalizeFenceLanguage(info: string): string =
+  let parts: seq[string] = info.split()
+  let token: string = (if parts.len > 0: parts[0] else: "").toLowerAscii()
+  if token.len == 0:
+    return ""
+
+  case token
+  of "c++":
+    return "cpp"
+  of "c#":
+    return "csharp"
+  else:
+    discard
+
+  var normalized: string = newStringOfCap(token.len)
+  for ch in token:
+    if isAsciiAlphaNum(ch) or ch == '-':
+      normalized.add ch
+
+  normalized
+
+
+proc extractFenceLanguages(bodyMd: string): seq[string] =
+  var inFence: bool = false
+  var fenceMarker: string = ""
+
+  for line in bodyMd.splitLines():
+    let trimmed: string = line.strip()
+    if trimmed.len >= 3 and (trimmed.startsWith("```") or trimmed.startsWith("~~~")):
+      let marker: string = trimmed[0..2]
+      if not inFence:
+        inFence = true
+        fenceMarker = marker
+        result.add normalizeFenceLanguage(trimmed[3 .. ^1].strip())
+      elif marker == fenceMarker:
+        inFence = false
+      continue
+
+    if inFence:
+      continue
+
+
 proc replaceFirst(s: string, sub: string, by: string): string =
-  let idx = s.find(sub)
+  let idx: int = s.find(sub)
   if idx < 0:
     return s
   s[0 ..< idx] & by & s[(idx + sub.len) .. ^1]
@@ -168,6 +210,28 @@ proc applyHeadingIds(html: string, items: seq[types.TocItem]): string =
   output
 
 
+proc applyCodeBlockLanguages(html: string, languages: seq[string]): string =
+  var output: string = html
+  var searchStart: int = 0
+  let openTag: string = "<pre><code>"
+
+  for language in languages:
+    let idx: int = output.find(openTag, searchStart)
+    if idx < 0:
+      break
+
+    if language.len == 0:
+      searchStart = idx + openTag.len
+      continue
+
+    let replacement: string =
+      "<pre data-language=\"" & language & "\"><code class=\"language-" & language & "\">"
+    output = output[0 ..< idx] & replacement & output[(idx + openTag.len) .. ^1]
+    searchStart = idx + replacement.len
+
+  output
+
+
 proc loadDocument*(collection: string, filePath: string): types.Document =
   let raw: string = readFile(filePath)
   let (yamlText, bodyMd) = splitFrontMatter(raw)
@@ -177,7 +241,8 @@ proc loadDocument*(collection: string, filePath: string): types.Document =
 
   let meta: DocumentMeta = parseMeta(yamlText, slugFallback, titleFallback)
   let tocItems: seq[TocItem] = extractToc(bodyMd)
-  let html: string = applyHeadingIds(markdown(bodyMd), tocItems)
+  let fenceLanguages: seq[string] = extractFenceLanguages(bodyMd)
+  let html: string = applyCodeBlockLanguages(applyHeadingIds(markdown(bodyMd), tocItems), fenceLanguages)
 
   types.Document(
     meta: meta,

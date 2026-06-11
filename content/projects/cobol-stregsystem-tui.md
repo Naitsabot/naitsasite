@@ -72,6 +72,10 @@ Apropos differing versions of COBOL, a function implemented in one might be prop
 
 I tried and failed to understand libraries, apart from being able to import a repository of intrinsic functions. To be honest, I didn't try to look that hard either.
 
+## Writing COBOL
+
+It can be said that most of the code is parsing and assembling strings, but it is also a real and repetitive pain.
+
 ### Self-imposed Limitations
 
 The reason for not looking much into COBOL flavours or libraries is to avoid limiting my experience. I want to experience the "real COBOL", and by that I mean restricting myself to:
@@ -99,9 +103,7 @@ Here is another representation of the columns screaming at you:
 ######*AAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBIIIIIIII
 ```
 
-## Writing COBOL
-
-## Copybooks
+### Copybooks
 
 Starting out, I didn't know copybooks were a thing, which could have avoided a wealth of confusion.
 
@@ -119,11 +121,9 @@ Copybooks are one of the things that actually seem to be designed by a sane pers
 
 For this project, it solved the pain of data becoming misaligned whenever I tried to define the same structure in multiple places. _Did you know that COBOL does not care what your data is called when transferring between modules or functions?_ Well, I do now.
 
-## Components
+### Components
 
-It can be said that most of the code is parsing and assembling strings, but it is also a real and repetitive pain.
-
-### HTTP
+#### HTTP
 
 COBOL is oooooooooold and does not support TCP intrinsically.
 
@@ -140,7 +140,7 @@ The client was used as a module, with a pretty basic and well-known process:
 
 COBOL is very verbose, so the code gets to be very verbose also. Even simple operations like GET and POST involved a lot of attention to formatting, line endings, and header ordering. Upon failure, there are no helpful error messages, so `DISPLAY`, and later the a logger, is your friend.
 
-### JSON Encoding/decoding
+#### JSON Encoding/decoding
 
 For my part this is a black box, partly. gnuCOBOL does actually have a few reserved `JSON-related` keywords, including `JSON PARSE` and `JSON GENERATE`, but the codebase does not really lean on them in the same way. Also, `JSON PARSE` remains unavailable in the actual runtime and will throw an exception when used.
 
@@ -150,19 +150,19 @@ JSON decoding is the part that gets more awkward. Here I let the AI loose, with 
 
 Funnily enough, this is probably the thing failing the most in the app still, with `jq` throwing errors that are not being handled...
 
-#### Tables
+##### Tables
 
 To store the retrieved data, a table data structure had to be implemented. It sounds simple, it is not, so again AI was let loose, as I could not be bothered.
 
 A funny thing is that all data is stored in temp files, as you cannot really save state otherwise. And because usernames in the Stregsystem can be called literally anything other than whitespace, tab characters had to be used as data separators.
 
-### Stregsystem API
+#### Stregsystem API
 
 The Stregsystem API component acts as a high-level interface and orchestration layer between the TUI component and the Stregsystem backend.
 It takes API request operations, builds and sends the HTTP request through the HTTP client, and then turns the response back into COBOL data using the implemented JSON decoder and the endpoint-specific parsing logic.
 Each needed endpoint is defined here.
 
-### The TUI Part
+#### The TUI Part
 
 When I first had the idea of the project, I looked into whether you could actually make a TUI with COBOL (easily, that is). COBOL is old, verbose, and stubborn, but as it turns out, this part was not actually that bad. COBOL has a `SCREEN SECTION` built right into the language, which lets you define what a screen looks like declaratively, and then display and accept input from it.
 
@@ -196,7 +196,7 @@ he main pain is that you are doing a lot of manual counting to figure out where 
 
 What is actually doing the heavy lifting under the hood, I cannot say for certain. My best guess is ncurses, given that terminal color and cursor control has to come from somewhere, but I have not verified this. It works, and I am choosing not to look too closely.
 
-#### Themes
+##### Themes
 
 The theming is simple but effective. Two variables, BG-COLOUR and FG-COLOUR, are referenced throughout the SCREEN SECTION definitions. Changing them changes the look of the entire application.
 
