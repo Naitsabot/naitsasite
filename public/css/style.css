@@ -22,7 +22,7 @@
     --font-sans: 'Source Sans Pro', sans-serif;
     --font-mono: 'Source Code Pro', monospace;
     --p-font: var(--font-sans);
-    --p-font-size: 14pt;
+    --p-font-size: 1em;
     --text-color: #000000;
 }
 
@@ -603,7 +603,8 @@ svg {
 }
 
 /* Fenced Blocks */
-.md-doc pre {
+pre {
+    font-family: var(--font-mono);
     font-size: 0.9em;
     background: var(--code-bg);
     border: 1px solid rgba(0, 0, 0, 0.12);
@@ -615,11 +616,11 @@ svg {
     position: relative;
 }
 
-.md-doc pre[data-language] {
+pre[data-language] {
     padding-top: 2.1em;
 }
 
-.md-doc pre[data-language]::before {
+pre[data-language]::before {
     content: attr(data-language);
     font-size: 0.72em;
     font-weight: 700;
@@ -631,7 +632,7 @@ svg {
     top: 0.85em;
 }
 
-.md-doc pre code {
+pre code {
     font-family: var(--font-mono);
     font-size: 0.9em;
     background: none;
@@ -643,62 +644,62 @@ svg {
     white-space: pre;
 }
 
-.md-doc pre[data-language="bash"],
-.md-doc pre[data-language="sh"],
-.md-doc pre[data-language="shell"],
-.md-doc pre[data-language="zsh"] {
+pre[data-language="bash"],
+pre[data-language="sh"],
+pre[data-language="shell"],
+pre[data-language="zsh"] {
     border-left-color: #7cc36d;
 }
 
-.md-doc pre[data-language="c"],
-.md-doc pre[data-language="cpp"],
-.md-doc pre[data-language="csharp"] {
+pre[data-language="c"],
+pre[data-language="cpp"],
+pre[data-language="csharp"] {
     border-left-color: #79a8ff;
 }
 
-.md-doc pre[data-language="cobol"] {
+pre[data-language="cobol"] {
     border-left-color: #d9b35f;
 }
 
-.md-doc pre[data-language="nim"] {
+pre[data-language="nim"] {
     border-left-color: #f5b041;
 }
 
-.md-doc pre[data-language="python"] {
+pre[data-language="python"] {
     border-left-color: #4b8bbe;
 }
 
-.md-doc pre[data-language="factor"] {
+pre[data-language="factor"] {
     border-left-color: #d97706;
 }
 
-.md-doc pre[data-language="rust"] {
+pre[data-language="rust"] {
     border-left-color: #ce422b;
 }
 
-.md-doc pre[data-language="haskell"] {
+pre[data-language="haskell"] {
     border-left-color: #5e4c8c;
 }
 
-.md-doc pre[data-language="typst"] {
+pre[data-language="typst"] {
     border-left-color: #239dad;
 }
 
-.md-doc pre[data-language="html"] {
+pre[data-language="html"] {
     border-left-color: #ff6b35;
 }
 
-.md-doc pre[data-language="css"] {
+pre[data-language="css"] {
     border-left-color: #264de4;
 }
 
-.md-doc pre[data-language="js"],
-.md-doc pre[data-language="javascript"] {
+pre[data-language="js"],
+pre[data-language="javascript"] {
     border-left-color: #f7df1e;
 }
 
-.md-doc pre[data-language="ts"],
-.md-doc pre[data-language="typescript"] {
+pre[data-language="ts"],
+pre[data-language="typescript"] {
     border-left-color: #3178c6;
 }
 
