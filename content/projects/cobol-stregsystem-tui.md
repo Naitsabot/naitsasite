@@ -1,5 +1,5 @@
 ---
-title: Stregsystem TUI Written in gnuCOBOL
+title: Stregsystem TUI Written in GnuCOBOL
 date: 2026-06-08
 slug: cobol-tui
 tags: [gnucobol]
@@ -56,7 +56,7 @@ This leads you, my dear reader, and myself onto this strange island, my brain nu
 
 ## gnuCOBOL
 
-COBOL has a rich history of [many versions, dialects and implementations](https://en.wikipedia.org/wiki/COBOL), but I can't say that I even looked at any of them. I took what seemed like it might be 1. open source and 2. able to run on a normal machine. I still don't really know what a mainframe is, or why some implementations are made purely for them. [gnuCOBOL](https://gnucobol.sourceforge.io/) has `gnu` in front of it... so gnuCOBOL it was!
+COBOL has a rich history of [many versions, dialects and implementations](https://en.wikipedia.org/wiki/COBOL), but I can't say that I even looked at any of them. I took what seemed like it might be 1. open source and 2. able to run on a normal machine. I still don't really know what a mainframe is, or why some implementations are made purely for them. [gnuCOBOL](https://gnucobol.sourceforge.io/) has `gnu` in front of it... so GnuCOBOL it was!
 
 ### Documentation
 
@@ -270,3 +270,8 @@ All there is to say: Review, research, replace.
 - [GnuCOBOL contrib thread](https://sourceforge.net/p/gnucobol/discussion/contrib/thread/2b474086/)
 - [OCamlPro GnuCOBOL contrib](https://github.com/OCamlPro/gnucobol-contrib/)
 - [GnuCOBOL socket samples](https://github.com/OCamlPro/gnucobol-contrib/tree/master/samples/socket)
+
+### Very good stuff I found way later
+
+- [GnuCOBOL FAQ (eplains stuff not explained elsewhere)](https://gnucobol.sourceforge.io/faq/index.html)
+- [Arnold Trembley: GnuCOBOL/OpenCOBOL Downloads, Binaries, and Links](https://www.arnoldtrembley.com/GnuCOBOL.htm)

@@ -36,7 +36,7 @@ cobc --version
 
 ## Where do we go now?
 
-Like any academic paper, as this is, we discuss the future... IN THE PAST GnuCOBOL has had many names, even earlier versions (I mean, who starts at version 2.2?). As [Brian Tiffin](https://sourceforge.net/u/btiffin/profile/) [writes](https://gnucobol.sourceforge.io/faq/index.html#what-is-the-development-history-of-gnucobol) in the [FAQ on the GnuCOBOL Sourceforge page](https://gnucobol.sourceforge.io/faq/index.html), (a page I wish I had found this *A YEAR AGO*, when I started using COBOL), GnuCOBOL has been called "OpenCOBOL" and, quite plainly, "GNU Cobol version" in the past. It has also shifted release platforms a few times, but there are versions *somewhere* all the way back to the OpenCOBOL 0.9.0 release on 25th January 2002.
+Like any academic paper, as this is, we discuss the future... IN THE PAST GnuCOBOL has had many names, even earlier versions (I mean, who starts at version 2.2?). As [Brian Tiffin](https://sourceforge.net/u/btiffin/profile/) [writes](https://gnucobol.sourceforge.io/faq/index.html#what-is-the-development-history-of-gnucobol) in the [FAQ on the GnuCOBOL Sourceforge page](https://gnucobol.sourceforge.io/faq/index.html), (a page I wish I had found *A YEAR AGO*, when I started using COBOL), GnuCOBOL has been called "OpenCOBOL" and, quite plainly, "GNU Cobol version" in the past. It has also shifted release platforms a few times, but there are versions *somewhere* all the way back to the OpenCOBOL 0.9.0 release on 25th January 2002.
 
 So... perhaps incorporating the old versions could be fun. Even though the newest version is from July 2023.
 
