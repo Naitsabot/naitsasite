@@ -1,10 +1,10 @@
 ---
-title: Recipe - Oven-fried Chicken
-date: 2026-02-28
-slug: oven-fired-chicken
-tags: [recipie]
-draft: false
-summary: Very quick and simple ovn-fried chicken recipie
+title: Recipe - Oven-fried Chicken  
+date: 2026-02-28  
+slug: oven-fired-chicken  
+tags: [recipe]  
+draft: false  
+summary: Very quick and simple oven-fried chicken recipe  
 ---
 
 # I Loooove Fried Chicken 🍗

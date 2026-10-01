@@ -18,7 +18,7 @@ After installing EndeavourOS on my T14s daily driver, which I lovingly call `Tho
 
 ## GnuCOBOL
 
-Did you know that GnuCOBOL does *not* have a tool or backend plugin that can install this god-loving programming language? What a travesty :( How else are you supposed to install the [Stregsystem COBOL TUI](https://github.com/Naitsabot/stregsystem-cob-tui)? Use the distro package manager?? Heaven's sake, then it would probably be installed in `/usr/bin/gnucobol/` and we can't have that! What if I want to install a whole *two*, yes, you heard me *TWO*, different versions of GnuCOBOL?? Fun detail: the [AUR](https://aur.archlinux.org/packages/gnucobol) only serves *one*!
+Did you know that GnuCOBOL does *not* have a tool or backend plugin that can install this god-loving programming language? What a travesty :( How else are you supposed to install the glorious [Stregsystem COBOL TUI](https://github.com/Naitsabot/stregsystem-cob-tui)? Use the distro package manager?? Heaven's sake, then it would probably be installed in `/usr/bin/gnucobol/` and we can't have that! What if I want to install a whole *two*, yes, you heard me *TWO*, different versions of GnuCOBOL?? Fun detail: the [AUR](https://aur.archlinux.org/packages/gnucobol) only serves *one*!
 
 So, a Mise tool plugin for installing GnuCOBOL is up for grabs, it seems.
 
